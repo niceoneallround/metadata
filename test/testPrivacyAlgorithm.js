@@ -30,8 +30,8 @@ describe('test Privacy Algorithm', function () {
       result.should.have.property('@id');
       result.should.have.property('@type');
       assert(jsonldUtils.isType(result, PN_T.Metadata), util.format('PA is not Metadata:%j', result));
-      assert(jsonldUtils.isType(result, PN_T.PrivacyAlgorithm), util.format('PA is not Metadata:%j', result));
-      assert(jsonldUtils.isType(result, PN_T.Resource), util.format('PA is not Metadata:%j', result));
+      assert(jsonldUtils.isType(result, PN_T.PrivacyAlgorithm), util.format('PA is not PrivacyAlgorithm:%j', result));
+      assert(jsonldUtils.isType(result, PN_T.Resource), util.format('PA is not Resource:%j', result));
 
       result.should.have.property(PN_P.privacyStep);
       result[PN_P.privacyStep].length.should.be.equal(1);
@@ -39,6 +39,13 @@ describe('test Privacy Algorithm', function () {
       let ps =   result[PN_P.privacyStep][0];
       ps.should.have.property(PN_P.privacyAction);
       ps[PN_P.privacyAction].length.should.be.equal(1);
+
+      let pa =   ps[PN_P.privacyAction][0];
+      pa.should.have.property('@id');
+      assert(jsonldUtils.isType(pa, PN_T.PrivacyAction), util.format('PA is not PrivacyAction:%j', pa));
+      pa.should.have.property(PN_P.action, PN_T.Obfuscate);
+      pa.should.have.property(PN_P.nodeType, PN_T.External);
+      pa.should.have.property(PN_P.orderNumber, 1);
 
     }); // 1.1
   }); // 1

@@ -4,5 +4,8 @@ privacy_algorithm:
   type: PrivacyAlgorithm
   privacy_step:
     - id: in-bound-pa-ps
+      node_type: connector
       privacy_action:
         - id: in-bound-pa-ps
+          action: obfuscate
+          node_type: external
