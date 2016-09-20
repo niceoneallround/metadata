@@ -2,6 +2,7 @@ version: 1
 privacy_algorithm:
   id: in-bound-pa
   type: PrivacyAlgorithm
+  description: A valid PA that shows all the mandatory fields, except this one
   privacy_step:
     - id: in-bound-pa-ps
       node_type: connector
