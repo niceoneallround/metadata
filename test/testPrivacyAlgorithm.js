@@ -47,6 +47,13 @@ describe('test Privacy Algorithm', function () {
       pa.should.have.property(PN_P.nodeType, PN_T.External);
       pa.should.have.property(PN_P.orderNumber, 1);
 
+      //
+      // It should be a valid PA if add issuer and creationTime that come from the JWT
+      //
+      result[PN_P.issuer] = 'fake';
+      result[PN_P.creationTime] = 'fake';
+      let verified = PAUtils.verifyPrivacyAlgorithm(result, 'fake.hostname');
+      assert(!verified, util.format('PA was not valid?:%j', verified));
     }); // 1.1
   }); // 1
 
