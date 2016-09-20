@@ -1,2 +1,2 @@
 # metadata
-Metadata utils
+Contains utilities et al for metadata

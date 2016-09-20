@@ -1,0 +1,8 @@
+version: 1
+privacy_algorithm:
+  id: in-bound-pa
+  type: PrivacyAlgorithm
+  privacy_step:
+    - id: in-bound-pa-ps
+      privacy_action:
+        - id: in-bound-pa-ps
