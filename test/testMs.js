@@ -5,6 +5,7 @@ const fs = require('fs');
 const jsonldUtils = require('jsonld-utils/lib/jldUtils');
 const MDUtils = require('../lib/md').utils;
 const PNDataModel = require('data-models/lib/PNDataModel');
+const PN_P = PNDataModel.PROPERTY;
 const PN_T = PNDataModel.TYPE;
 const YAML = require('js-yaml');
 const util = require('util');
@@ -27,6 +28,11 @@ describe('test MS dispatch works', function () {
       result.should.have.property('@type');
       assert(jsonldUtils.isType(result, PN_T.Metadata), util.format('PA is not Metadata:%j', result));
       assert(jsonldUtils.isType(result, PN_T.PrivacyAlgorithm), util.format('PA is not Metadata:%j', result));
+
+      result[PN_P.issuer] = 'fake';
+      result[PN_P.creationTime] = 'fake';
+      let verified = MDUtils.verifyMetadata(result, props);
+      assert(!verified, util.format('PA was not valid?:%j', verified));
     }); // 1.1
   }); // 1
 
