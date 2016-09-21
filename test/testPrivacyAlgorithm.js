@@ -14,7 +14,7 @@ const util = require('util');
 describe('test Privacy Algorithm', function () {
   'use strict';
 
-  let props = { hostname: 'fake.hostname', domainName: 'fake.com' };
+  let props = { hostname: 'fake.hostname', domainName: 'fake.com', issuer: 'theIssuer', creationTime: 'createTime' };
 
   function readFile(mdFile) {
     return fs.readFileSync(__dirname + '/data/' + mdFile, 'utf8');
@@ -50,8 +50,6 @@ describe('test Privacy Algorithm', function () {
       //
       // It should be a valid PA if add issuer and creationTime that come from the JWT
       //
-      result[PN_P.issuer] = 'fake';
-      result[PN_P.creationTime] = 'fake';
       let verified = PAUtils.verifyPrivacyAlgorithm(result, 'fake.hostname');
       assert(!verified, util.format('PA was not valid?:%j', verified));
     }); // 1.1
