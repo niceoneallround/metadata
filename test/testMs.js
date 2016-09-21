@@ -13,7 +13,7 @@ const util = require('util');
 describe('test MS dispatch works', function () {
   'use strict';
 
-  let props = { hostname: 'fake.com' };
+  let props = { hostname: 'fake.hostname', domainName: 'fake.com' };
 
   function readFile(mdFile) {
     return fs.readFileSync(__dirname + '/data/' + mdFile, 'utf8');
