@@ -3,6 +3,7 @@
 const assert = require('assert');
 const fs = require('fs');
 const jsonldUtils = require('jsonld-utils/lib/jldUtils');
+const JWTClaims = require('jwt-utils/lib/jwtUtils').claims;
 const MDUtils = require('../lib/md').utils;
 const PNDataModel = require('data-models/lib/PNDataModel');
 const PN_P = PNDataModel.PROPERTY;
@@ -35,5 +36,39 @@ describe('test MS dispatch works', function () {
       assert(!verified, util.format('PA was not valid?:%j', verified));
     }); // 1.1
   }); // 1
+
+  describe('2 JWTPayload2Node tests', function () {
+
+    it('2.1 should handle a METADATA_CLAIM', function () {
+      let yaml = YAML.safeLoad(readFile('PAValid.yml'));
+      let md = MDUtils.YAML2Metadata(yaml.privacy_algorithm, props);
+      let mdId = md['@id'];
+
+      // create JWT payload - no need to sign
+      let payload = {};
+      payload[JWTClaims.METADATA_CLAIM] = md;
+      payload.sub = mdId;
+      md['@id'] = null; // so can check it is set
+      payload.iss = 'abc.com';
+      payload.iat = 12992929;
+
+      let node = MDUtils.JWTPayload2Node(payload, 'abc.com');
+      node.should.have.property('@id', mdId);
+      node.should.have.property(PN_P.issuer);
+      node.should.have.property(PN_P.creationTime);
+    }); // 2.1
+
+    it('2.2 should handle a PN_GRAPH_CLAIM', function () {
+      let yaml = YAML.safeLoad(readFile('PAValid.yml'));
+      let md = MDUtils.YAML2Metadata(yaml.privacy_algorithm, props);
+
+      // create JWT payload - no need to sign
+      let payload = {};
+      payload[JWTClaims.PN_GRAPH_CLAIM] = md;
+
+      let node = MDUtils.JWTPayload2Node(payload, 'abc.com');
+      node.should.have.property('@id', md['@id']);
+    }); // 2.2
+  }); // 2
 
 });
