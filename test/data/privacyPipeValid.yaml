@@ -1,0 +1,5 @@
+version: 1
+privacy_pipe:
+  id: test-pp
+  type: PrivacyPipe
+  description: test_description

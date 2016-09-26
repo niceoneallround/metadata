@@ -29,9 +29,9 @@ describe('test Identity Syndicatiton Algorithm', function () {
 
       result.should.have.property('@id');
       result.should.have.property('@type');
-      assert(jsonldUtils.isType(result, PN_T.Metadata), util.format('PA is not Metadata:%j', result));
-      assert(jsonldUtils.isType(result, PN_T.IdentitySyndicationAlgorithm), util.format('RS is not a ISAlgorithm:%j', result));
-      assert(jsonldUtils.isType(result, PN_T.Resource), util.format('PA is not Resource:%j', result));
+      assert(jsonldUtils.isType(result, PN_T.Metadata), util.format('ISA is not Metadata:%j', result));
+      assert(jsonldUtils.isType(result, PN_T.IdentitySyndicationAlgorithm), util.format('ISA is not a ISAlgorithm:%j', result));
+      assert(jsonldUtils.isType(result, PN_T.Resource), util.format('ISA is not Resource:%j', result));
 
       result.should.have.property(PN_P.referenceSource, 'test_reference_source');
       result.should.have.property(PN_P.subjectType, 'test_subject_type');
