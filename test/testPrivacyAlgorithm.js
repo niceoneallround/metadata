@@ -24,7 +24,7 @@ describe('test Privacy Algorithm', function () {
 
     it('1.1 should create a PA from a valid PA YAML version', function () {
       let md = YAML.safeLoad(readFile('PAValid.yml'));
-      let result = PAUtils.YAML2PrivacyAlgorithm(md.privacy_algorithm, props);
+      let result = PAUtils.YAML2Node(md.privacy_algorithm, props);
       console.log(result);
 
       result.should.have.property('@id');
@@ -32,6 +32,7 @@ describe('test Privacy Algorithm', function () {
       assert(jsonldUtils.isType(result, PN_T.Metadata), util.format('PA is not Metadata:%j', result));
       assert(jsonldUtils.isType(result, PN_T.PrivacyAlgorithm), util.format('PA is not PrivacyAlgorithm:%j', result));
       assert(jsonldUtils.isType(result, PN_T.Resource), util.format('PA is not Resource:%j', result));
+      result.should.have.property(PN_P.description);
 
       result.should.have.property(PN_P.privacyStep);
       result[PN_P.privacyStep].length.should.be.equal(1);
@@ -50,7 +51,7 @@ describe('test Privacy Algorithm', function () {
       //
       // It should be a valid PA if add issuer and creationTime that come from the JWT
       //
-      let verified = PAUtils.verifyPrivacyAlgorithm(result, 'fake.hostname');
+      let verified = PAUtils.verify(result, 'fake.hostname');
       assert(!verified, util.format('PA was not valid?:%j', verified));
     }); // 1.1
   }); // 1

@@ -2,19 +2,17 @@
 
 const assert = require('assert');
 const fs = require('fs');
-const jsonldUtils = require('jsonld-utils/lib/jldUtils');
 const JWTClaims = require('jwt-utils/lib/jwtUtils').claims;
 const MDUtils = require('../lib/md').utils;
 const PNDataModel = require('data-models/lib/PNDataModel');
 const PN_P = PNDataModel.PROPERTY;
-const PN_T = PNDataModel.TYPE;
 const YAML = require('js-yaml');
 const util = require('util');
 
 describe('test MS dispatch works', function () {
   'use strict';
 
-  let props = { hostname: 'fake.hostname', domainName: 'fake.com' };
+  let props = { hostname: 'fake.hostname', domainName: 'fake.com', issuer: 'abc.com', creationTime: '1221' };
 
   function readFile(mdFile) {
     return fs.readFileSync(__dirname + '/data/' + mdFile, 'utf8');
@@ -25,16 +23,17 @@ describe('test MS dispatch works', function () {
     it('1.1 should dispatch to the correct constructor', function () {
       let md = YAML.safeLoad(readFile('PAValid.yml'));
       let result = MDUtils.YAML2Metadata(md.privacy_algorithm, props);
-      result.should.have.property('@id');
-      result.should.have.property('@type');
-      assert(jsonldUtils.isType(result, PN_T.Metadata), util.format('PA is not Metadata:%j', result));
-      assert(jsonldUtils.isType(result, PN_T.PrivacyAlgorithm), util.format('PA is not Metadata:%j', result));
-
-      result[PN_P.issuer] = 'fake';
-      result[PN_P.creationTime] = 'fake';
-      let verified = MDUtils.verifyMetadata(result, props);
-      assert(!verified, util.format('PA was not valid?:%j', verified));
+      let error = MDUtils.verifyMetadata(result, props);
+      assert(!error, util.format('PA was not valid?:%j', error));
     }); // 1.1
+
+    it('1.2 should dispatch to the correct constructor', function () {
+      let md = YAML.safeLoad(readFile('referenceSourceValid.yaml'));
+      let result = MDUtils.YAML2Metadata(md.reference_source, props);
+      let error = MDUtils.verifyMetadata(result, props);
+      assert(!error, util.format('RS was not valid?:%j', error));
+    }); // 1.2
+
   }); // 1
 
   describe('2 JWTPayload2Node tests', function () {
