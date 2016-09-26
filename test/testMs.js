@@ -22,15 +22,15 @@ describe('test MS dispatch works', function () {
 
     it('1.1 should dispatch to the correct constructor', function () {
       let md = YAML.safeLoad(readFile('PAValid.yml'));
-      let result = MDUtils.YAML2Metadata(md.privacy_algorithm, props);
-      let error = MDUtils.verifyMetadata(result, props);
+      let result = MDUtils.YAML2Node(md.privacy_algorithm, props);
+      let error = MDUtils.verify(result, props);
       assert(!error, util.format('PA was not valid?:%j', error));
     }); // 1.1
 
     it('1.2 should dispatch to the correct constructor', function () {
       let md = YAML.safeLoad(readFile('referenceSourceValid.yaml'));
-      let result = MDUtils.YAML2Metadata(md.reference_source, props);
-      let error = MDUtils.verifyMetadata(result, props);
+      let result = MDUtils.YAML2Node(md.reference_source, props);
+      let error = MDUtils.verify(result, props);
       assert(!error, util.format('RS was not valid?:%j', error));
     }); // 1.2
 
@@ -40,7 +40,7 @@ describe('test MS dispatch works', function () {
 
     it('2.1 should handle a METADATA_CLAIM', function () {
       let yaml = YAML.safeLoad(readFile('PAValid.yml'));
-      let md = MDUtils.YAML2Metadata(yaml.privacy_algorithm, props);
+      let md = MDUtils.YAML2Node(yaml.privacy_algorithm, props);
       let mdId = md['@id'];
 
       // create JWT payload - no need to sign
@@ -59,7 +59,7 @@ describe('test MS dispatch works', function () {
 
     it('2.2 should handle a PN_GRAPH_CLAIM', function () {
       let yaml = YAML.safeLoad(readFile('PAValid.yml'));
-      let md = MDUtils.YAML2Metadata(yaml.privacy_algorithm, props);
+      let md = MDUtils.YAML2Node(yaml.privacy_algorithm, props);
 
       // create JWT payload - no need to sign
       let payload = {};
