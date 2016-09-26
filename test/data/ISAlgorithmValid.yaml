@@ -1,6 +1,7 @@
 version: 1
 is_algorithm:
-  id: is-1
+  id: test-isa
   type: IdentitySyndicationAlgorithm
-  description: A test IS A
-  reference_source: http://test/id
+  description: test_description
+  reference_source: test_reference_source
+  subject_type: test_subject_type

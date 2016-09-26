@@ -11,7 +11,7 @@ const should = require('should');
 const YAML = require('js-yaml');
 const util = require('util');
 
-describe('test Identity Syndicaiton Algorithm', function () {
+describe('test Identity Syndicatiton Algorithm', function () {
   'use strict';
 
   function readFile(mdFile) {
@@ -33,8 +33,9 @@ describe('test Identity Syndicaiton Algorithm', function () {
       assert(jsonldUtils.isType(result, PN_T.IdentitySyndicationAlgorithm), util.format('RS is not a ISAlgorithm:%j', result));
       assert(jsonldUtils.isType(result, PN_T.Resource), util.format('PA is not Resource:%j', result));
 
-      result.should.have.property(PN_P.referenceSource);
-      result.should.have.property(PN_P.description);
+      result.should.have.property(PN_P.referenceSource, 'test_reference_source');
+      result.should.have.property(PN_P.subjectType, 'test_subject_type');
+      result.should.have.property(PN_P.description, 'test_description');
 
       let verified = ISAUtils.verify(result, 'fake.hostname');
       assert(!verified, util.format('ISA was not valid?:%j', verified));
