@@ -34,6 +34,13 @@ describe('test MS dispatch works', function () {
       assert(!error, util.format('RS was not valid?:%j', error));
     }); // 1.2
 
+    it('1.3 should dispatch to the correct constructor', function () {
+      let md = YAML.safeLoad(readFile('ISAlgorithmValid.yaml'));
+      let result = MDUtils.YAML2Node(md.is_algorithm, props);
+      let error = MDUtils.verify(result, props);
+      assert(!error, util.format('ISA was not valid?:%j', error));
+    }); // 1.3
+
   }); // 1
 
   describe('2 JWTPayload2Node tests', function () {
@@ -76,13 +83,19 @@ describe('test MS dispatch works', function () {
       let md = YAML.safeLoad(readFile('PAValid.yml'));
       let result = MDUtils.YAML2Id(md.privacy_algorithm, props);
       result.should.be.equal('https://md.pn.id.webshield.io/resource/com/fake#in-bound-pa');
-    }); // 1.1
+    }); // 3.1
 
     it('3.2 should dispatch to the correct ID constructor', function () {
       let md = YAML.safeLoad(readFile('referenceSourceValid.yaml'));
       let result = MDUtils.YAML2Id(md.reference_source, props);
       result.should.be.equal('https://md.pn.id.webshield.io/resource/com/fake#rs-1');
-    }); // 1.2
+    }); // 3.2
+
+    it('3.3 should dispatch to the correct ID constructor', function () {
+      let md = YAML.safeLoad(readFile('ISAlgorithmValid.yaml'));
+      let result = MDUtils.YAML2Id(md.is_algorithm, props);
+      result.should.be.equal('https://md.pn.id.webshield.io/resource/com/fake#test-isa');
+    }); // 3.2
 
   }); // 1
 
