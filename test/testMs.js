@@ -70,4 +70,20 @@ describe('test MS dispatch works', function () {
     }); // 2.2
   }); // 2
 
+  describe('3 MS YAML2Id tests', function () {
+
+    it('3.1 should dispatch to the correct ID constructor', function () {
+      let md = YAML.safeLoad(readFile('PAValid.yml'));
+      let result = MDUtils.YAML2Id(md.privacy_algorithm, props);
+      result.should.be.equal('https://md.pn.id.webshield.io/resource/com/fake#in-bound-pa');
+    }); // 1.1
+
+    it('3.2 should dispatch to the correct ID constructor', function () {
+      let md = YAML.safeLoad(readFile('referenceSourceValid.yaml'));
+      let result = MDUtils.YAML2Id(md.reference_source, props);
+      result.should.be.equal('https://md.pn.id.webshield.io/resource/com/fake#rs-1');
+    }); // 1.2
+
+  }); // 1
+
 });
