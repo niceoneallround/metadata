@@ -1,0 +1,6 @@
+version: 1
+is_algorithm:
+  id: is-1
+  type: IdentitySyndicationAlgorithm
+  description: A test IS A
+  reference_source: http://test/id

@@ -14,8 +14,6 @@ const util = require('util');
 describe('test Privacy Algorithm', function () {
   'use strict';
 
-  let props = { hostname: 'fake.hostname', domainName: 'fake.com', issuer: 'theIssuer', creationTime: 'createTime' };
-
   function readFile(mdFile) {
     return fs.readFileSync(__dirname + '/data/' + mdFile, 'utf8');
   }
@@ -24,8 +22,8 @@ describe('test Privacy Algorithm', function () {
 
     it('1.1 should create a PA from a valid PA YAML version', function () {
       let md = YAML.safeLoad(readFile('PAValid.yml'));
+      let props = { hostname: 'fake.hostname', domainName: 'fake.com', issuer: 'theIssuer', creationTime: 'createTime' };
       let result = PAUtils.YAML2Node(md.privacy_algorithm, props);
-      console.log(result);
 
       result.should.have.property('@id');
       result.should.have.property('@type');
