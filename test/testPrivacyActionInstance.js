@@ -3,8 +3,8 @@
 const assert = require('assert');
 const fs = require('fs');
 const jsonldUtils = require('jsonld-utils/lib/jldUtils');
-const PActionUtils = require('../../lib/pa/privacyAction').utils;
-const PActionIUtils = require('../../lib/pa/privacyActionInstance').utils;
+const PActionUtils = require('../lib/privacyAction').utils;
+const PActionIUtils = require('../lib/privacyActionInstance').utils;
 const PNDataModel = require('data-models/lib/PNDataModel');
 const PN_P = PNDataModel.PROPERTY;
 const PN_T = PNDataModel.TYPE;
@@ -16,7 +16,7 @@ describe('test Privacy Action Instance', function () {
   'use strict';
 
   function readFile(mdFile) {
-    return fs.readFileSync(__dirname + '/../data/' + mdFile, 'utf8');
+    return fs.readFileSync(__dirname + '/data/' + mdFile, 'utf8');
   }
 
   describe('1 PActionInstance tests', function () {
@@ -24,7 +24,7 @@ describe('test Privacy Action Instance', function () {
     it('1.1 should create a PAactionInstance from valid params', function () {
 
       // create the privacy action
-      let md = YAML.safeLoad(readFile('PActionValid.yaml'));
+      let md = YAML.safeLoad(readFile('privacyActionValid.yaml'));
       let props = { hostname: 'fake.hostname', domainName: 'fake.com', pa: 'fake.pa', privacyStep: 'fake.pstep' };
       let paction = PActionUtils.YAML2Node(md.privacy_action, props);
 

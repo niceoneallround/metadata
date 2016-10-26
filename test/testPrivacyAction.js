@@ -3,7 +3,7 @@
 const assert = require('assert');
 const fs = require('fs');
 const jsonldUtils = require('jsonld-utils/lib/jldUtils');
-const PActionUtils = require('../../lib/pa/privacyAction').utils;
+const PActionUtils = require('../lib/privacyAction').utils;
 const PNDataModel = require('data-models/lib/PNDataModel');
 const PN_P = PNDataModel.PROPERTY;
 const PN_T = PNDataModel.TYPE;
@@ -15,13 +15,13 @@ describe('test Privacy Action', function () {
   'use strict';
 
   function readFile(mdFile) {
-    return fs.readFileSync(__dirname + '/../data/' + mdFile, 'utf8');
+    return fs.readFileSync(__dirname + '/data/' + mdFile, 'utf8');
   }
 
   describe('1 PAction tests', function () {
 
     it('1.1 should create a PAaction from a valid PAction YAML version', function () {
-      let md = YAML.safeLoad(readFile('PActionValid.yaml'));
+      let md = YAML.safeLoad(readFile('privacyActionValid.yaml'));
       let props = { hostname: 'fake.hostname', domainName: 'fake.com', pa: 'fake.pa', privacyStep: 'fake.pstep' };
       let result = PActionUtils.YAML2Node(md.privacy_action, props);
 
@@ -31,7 +31,7 @@ describe('test Privacy Action', function () {
       assert(jsonldUtils.isType(result, PN_T.PrivacyAction), util.format('PAction is not PrivacyAction:%j', result));
       result.should.have.property(PN_P.description);
 
-      result.should.have.property(PN_P.privacyStep);
+      result.should.have.property(PN_P.privacyStep, 'fake.pstep');
       result.should.have.property(PN_P.contentObfuscationAlgorithm);
       result.should.have.property(PN_P.obfuscationProvider);
       result.should.have.property(PN_P.obfuscationService);
@@ -42,12 +42,12 @@ describe('test Privacy Action', function () {
       //
       // It should be a valid PA if add issuer and creationTime that come from the JWT
       //
-      let verified = PActionUtils.verify(result, 'fake.hostname', props);
+      let verified = PActionUtils.verify(result, props);
       assert(!verified, util.format('PAction was not valid?:%j', verified));
     }); // 1.1
 
     it('1.2 should nit create a PAaction from an invalid PAction YAML version', function () {
-      let md = YAML.safeLoad(readFile('PActionValid.yaml'));
+      let md = YAML.safeLoad(readFile('privacyActionValid.yaml'));
       let props = { hostname: 'fake.hostname', domainName: 'fake.com', pa: 'fake.pa', privacyStep: 'fake.pstep' };
 
       md.privacy_action.kms = null;
