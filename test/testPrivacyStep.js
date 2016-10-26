@@ -42,6 +42,16 @@ describe('test Privacy Action', function () {
       assert(!verified, util.format('PStep was not valid?:%j', verified));
     }); // 1.1
 
+    it('1.2 should return error if create from an invalidYAML version', function () {
+      let md = YAML.safeLoad(readFile('privacyStepValid.yaml'));
+      let props = { hostname: 'fake.hostname', domainName: 'fake.com', pa: 'fake.pa' };
+
+      md.privacy_step.node_type = null;
+      let result = PStepUtils.YAML2Node(md.privacy_step, props);
+      assert(jsonldUtils.isType(result, PN_T.Error), util.format('expected an Error%j', result));
+
+    }); // 1.2
+
   }); // 1
 
 });
