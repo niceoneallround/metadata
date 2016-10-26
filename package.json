@@ -1,10 +1,10 @@
 {
   "name": "metadata",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "Utils for metadata",
   "main": "index.js",
   "scripts": {
-    "test": "npm run test"
+    "test": "gulp test"
   },
   "repository": {
     "type": "git",

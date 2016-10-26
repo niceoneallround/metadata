@@ -1,0 +1,13 @@
+version: 1
+privacy_action:
+  id: in-bound-pa-ps
+  description: test pa includes all possible props
+  content_obfuscation_algorithm: A256GCM
+  obfuscation_provider: http://ionicsecurity.com
+  obfuscation_service: fake.id
+  kms: http://md.pn.id.webshield.io/resource/com/acme#my-kms
+  skip_orchestration: false
+  schema:  {
+    $schema: 'http://experian.schema.webshield.io',
+    'http//json-schema.org/title': 'http://experian.schema.webshield.io/type#Subject',
+    'http://json-schema.org/type': 'object' }
