@@ -3,6 +3,7 @@ privacy_pipe:
   id: test-pp
   type: PrivacyPipe
   description: test_description
+  client: client.com
+  destination: destination/url
   obfuscation_context:
-    privacy_algorithm: '1'
     action: obfuscate
