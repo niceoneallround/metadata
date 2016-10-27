@@ -31,6 +31,7 @@ describe('test Privacy Algorithm V2', function () {
       assert(jsonldUtils.isType(result, PN_T.PrivacyAlgorithm), util.format('PA is not PrivacyAlgorithm:%j', result));
       assert(jsonldUtils.isType(result, PN_T.Resource), util.format('PA is not Resource:%j', result));
       result.should.have.property(PN_P.description);
+      result.should.have.property(PN_P.version, '2');
 
       result.should.have.property(PN_P.privacyStep);
       result[PN_P.privacyStep].length.should.be.equal(1);

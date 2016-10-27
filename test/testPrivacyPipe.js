@@ -33,6 +33,8 @@ describe('test Privacy Pipe', function () {
       assert(jsonldUtils.isType(result, PN_T.PrivacyPipe), util.format('PP is not a PrivacyPipe:%j', result));
       assert(!jsonldUtils.isType(result, PN_T.Resource), util.format('PP should not be a Resource:%j', result));
 
+      result.should.have.property(PN_P.version, '2');
+
       result.should.have.property(PN_P.description, 'test_description');
 
       let verified = PPUtils.verify(result, props);
