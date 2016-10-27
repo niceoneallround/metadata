@@ -86,7 +86,6 @@ describe('test Privacy Step Instance', function () {
 
       // create the privacy step instance
       let result = PStepIUtils.create(psit, pstep, pp, props);
-      console.log(result);
       result.should.have.property('@id');
       result.should.have.property('@type');
       assert(jsonldUtils.isType(result, PN_T.Metadata), util.format('is not Metadata:%j', result));

@@ -48,7 +48,6 @@ describe('test Privacy Action Instance', function () {
 
       // create the privacy action instance
       let result = PActionIUtils.create(pait, paction, pp, { hostname: 'fake.hostname', domainName: 'fake.domain.name' });
-      console.log(result);
       result.should.have.property('@id');
       result.should.have.property('@type');
       assert(jsonldUtils.isType(result, PN_T.Metadata), util.format('PAction is not Metadata:%j', result));

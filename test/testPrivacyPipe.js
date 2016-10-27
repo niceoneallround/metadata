@@ -35,7 +35,7 @@ describe('test Privacy Pipe', function () {
 
       result.should.have.property(PN_P.description, 'test_description');
 
-      let verified = PPUtils.verify(result, 'fake.hostname');
+      let verified = PPUtils.verify(result, props);
       assert(!verified, util.format('PP was not valid?:%j', verified));
     }); // 1.1
   }); // 1
