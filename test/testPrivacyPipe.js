@@ -32,10 +32,13 @@ describe('test Privacy Pipe', function () {
       assert(jsonldUtils.isType(result, PN_T.Metadata), util.format('PP is not Metadata:%j', result));
       assert(jsonldUtils.isType(result, PN_T.PrivacyPipe), util.format('PP is not a PrivacyPipe:%j', result));
       assert(!jsonldUtils.isType(result, PN_T.Resource), util.format('PP should not be a Resource:%j', result));
-
       result.should.have.property(PN_P.version, '2');
-
       result.should.have.property(PN_P.description, 'test_description');
+      result.should.have.property(PN_P.obfuscationContext);
+      result[PN_P.obfuscationContext].should.have.property('@type');
+      assert(jsonldUtils.isType(result[PN_P.obfuscationContext], PN_T.ObfuscationContext), util.format('PP is not ObfuscationContext:%j', result));
+      result[PN_P.obfuscationContext].should.have.property(PN_P.action, PN_T.Obfuscate);
+      result[PN_P.obfuscationContext].should.have.property(PN_P.privacyAlgorithm, '1');
 
       let verified = PPUtils.verify(result, props);
       assert(!verified, util.format('PP was not valid?:%j', verified));

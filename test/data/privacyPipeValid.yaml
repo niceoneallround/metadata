@@ -3,3 +3,6 @@ privacy_pipe:
   id: test-pp
   type: PrivacyPipe
   description: test_description
+  obfuscation_context:
+    privacy_algorithm: '1'
+    action: obfuscate
