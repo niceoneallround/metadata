@@ -1,0 +1,11 @@
+version: 1
+privacy_action_instance:
+  id: privacy-action-instance-1
+  privacy_action: 'action-1-id'
+  obfuscation_service: fake.os.id
+  skip_orchestration: false
+  schema:  {
+    $schema: 'http://experian.schema.webshield.io',
+    'http//json-schema.org/title': 'http://experian.schema.webshield.io/type#Subject',
+    'http://json-schema.org/type': 'object' }
+  encrypy_key_md_jwt: 'jwt'

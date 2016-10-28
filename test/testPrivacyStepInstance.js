@@ -100,4 +100,22 @@ describe('test Privacy Step Instance', function () {
     }); // 1.1
   }); // 1
 
+  describe('2 Privacy Step Instance Template from a YAML file', function () {
+
+    it('2.1 should create instance if valid yaml format', function () {
+
+      let md = YAML.safeLoad(readFile('privacyStepInstanceValid.yaml'));
+      let props = { hostname: 'fake.hostname', domainName: 'fake.com', pa: 'fake.pa' };
+      let result = PStepIUtils.YAML2Node(md.privacy_step_instance, props);
+
+      result.should.have.property('@id');
+      result.should.have.property('@type');
+      assert(jsonldUtils.isType(result, PN_T.PrivacyStepInstance), util.format('is not %s :%j', PN_T.PrivacyStepInstance, result));
+      result.should.have.property(PN_P.privacyStep, 'privacy-step-id');
+      result.should.have.property(PN_P.privacyActionInstance);
+      result[PN_P.privacyActionInstance].length.should.be.equal(1);
+
+    }); // 2.1
+  }); // describe 2
+
 });

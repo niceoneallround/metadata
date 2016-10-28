@@ -32,6 +32,9 @@ describe('test Privacy Algorithm Instance', function () {
       result.should.have.property(PN_P.description);
       result.should.have.property(PN_P.privacyAlgorithm, 'http://rs.id.webshield.io/privacy_algorithm/com/acme#palg-1');
 
+      result.should.have.property(PN_P.privacyStepInstance);
+      result[PN_P.privacyStepInstance].length.should.be.equal(1);
+
     }); // 1.1
   }); // describe 1
 });

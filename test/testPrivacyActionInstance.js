@@ -19,7 +19,7 @@ describe('test Privacy Action Instance', function () {
     return fs.readFileSync(__dirname + '/data/' + mdFile, 'utf8');
   }
 
-  describe('1 PActionInstance tests', function () {
+  describe('1 PActionInstance Create tests', function () {
 
     it('1.1 should create a PAactionInstance from valid params', function () {
 
@@ -61,5 +61,24 @@ describe('test Privacy Action Instance', function () {
 
     }); // 1.1
   }); // 1
+
+  describe('2 Privacy Action Instance Template from a YAML file', function () {
+
+    it('2.1 should create instance if valid yaml format', function () {
+
+      let md = YAML.safeLoad(readFile('privacyActionInstanceValid.yaml'));
+      let props = { hostname: 'fake.hostname', domainName: 'fake.com', pa: 'fake.pa' };
+      let result = PActionIUtils.YAML2Node(md.privacy_action_instance, props);
+
+      result.should.have.property('@id');
+      result.should.have.property('@type');
+      assert(jsonldUtils.isType(result, PN_T.PrivacyActionInstance), util.format('is not %s :%j', PN_T.PrivacyActionInstance, result));
+      result.should.have.property(PN_P.privacyAction, 'action-1-id');
+      result.should.have.property(PN_P.skipOrchestration, false);
+      result.should.have.property(PN_P.schema);
+      result.should.have.property(PN_P.encryptKeyMDJWT);
+
+    }); // 2.1
+  }); // describe 2
 
 });
