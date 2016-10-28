@@ -114,7 +114,7 @@ describe('test Privacy Step Instance', function () {
       result.should.have.property(PN_P.privacyStep, 'privacy-step-id');
       result.should.have.property(PN_P.privacyActionInstance);
       result.should.have.property(PN_P.client);
-      result.should.have.property(PN_P.destination);
+      result.should.have.property(PN_P.next);
       result[PN_P.privacyActionInstance].length.should.be.equal(1);
 
     }); // 2.1
