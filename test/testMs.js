@@ -41,6 +41,13 @@ describe('test MS dispatch works', function () {
       assert(!error, util.format('ISA was not valid?:%j', error));
     }); // 1.3
 
+    it('1.4 should dispatch to privacy algorithm instance', function () {
+      let md = YAML.safeLoad(readFile('privacyAlgorithmInstanceValid.yaml'));
+      let result = MDUtils.YAML2Node(md.privacy_algorithm_instance, props);
+      let error = MDUtils.verify(result, props);
+      assert(!error, util.format('Privacy Algorithm Instance was not valid?:%j', error));
+    }); // 1.3
+
   }); // 1
 
   describe('2 JWTPayload2Node tests', function () {
