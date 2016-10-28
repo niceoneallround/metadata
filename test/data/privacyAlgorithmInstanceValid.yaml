@@ -1,0 +1,6 @@
+version: 1
+privacy_algorithm_instance:
+  id: palgi-template-1
+  type: PrivacyAlgorithmInstance
+  description: create a Template version
+  privacy_algorithm: http://rs.id.webshield.io/privacy_algorithm/com/acme#palg-1
