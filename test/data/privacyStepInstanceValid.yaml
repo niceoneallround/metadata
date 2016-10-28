@@ -2,6 +2,8 @@ version: 1
 privacy_step_instance:
   id: ps-instance-1
   privacy_step: privacy-step-id
+  client: client.com
+  destination: destination.com/url
   privacy_action_instance:
     - id: pa-instance-1
       privacy_action: privacy-action-id

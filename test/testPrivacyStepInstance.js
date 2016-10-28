@@ -113,6 +113,8 @@ describe('test Privacy Step Instance', function () {
       assert(jsonldUtils.isType(result, PN_T.PrivacyStepInstance), util.format('is not %s :%j', PN_T.PrivacyStepInstance, result));
       result.should.have.property(PN_P.privacyStep, 'privacy-step-id');
       result.should.have.property(PN_P.privacyActionInstance);
+      result.should.have.property(PN_P.client);
+      result.should.have.property(PN_P.destination);
       result[PN_P.privacyActionInstance].length.should.be.equal(1);
 
     }); // 2.1
