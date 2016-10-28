@@ -4,6 +4,7 @@ privacy_action_instance:
   privacy_action: 'action-1-id'
   obfuscation_service: fake.os.id
   skip_orchestration: false
+  action: 'obfuscate'
   schema:  {
     $schema: 'http://experian.schema.webshield.io',
     'http//json-schema.org/title': 'http://experian.schema.webshield.io/type#Subject',
