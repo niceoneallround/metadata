@@ -42,9 +42,16 @@ describe('test Privacy Pipe', function () {
       result[PN_P.destination].should.have.property('@value', 'destination/url');
 
       result.should.have.property(PN_P.obfuscationContext);
-      result[PN_P.obfuscationContext].should.have.property('@type');
-      assert(jsonldUtils.isType(result[PN_P.obfuscationContext], PN_T.ObfuscationContext), util.format('PP is not ObfuscationContext:%j', result));
-      result[PN_P.obfuscationContext].should.have.property(PN_P.action, PN_T.Obfuscate);
+      let oc = result[PN_P.obfuscationContext];
+      oc.should.have.property('@type');
+      assert(jsonldUtils.isType(oc, PN_T.ObfuscationContext), util.format('PP is not ObfuscationContext:%j', result));
+      oc.should.have.property(PN_P.action, PN_T.Obfuscate);
+      oc.should.have.property(PN_P.privacyAlgorithmInstanceTemplate);
+      oc[PN_P.privacyAlgorithmInstanceTemplate].length.should.be.equal(1);
+
+      let palgI = oc[PN_P.privacyAlgorithmInstanceTemplate][0];
+      palgI.should.have.property('@id');
+      assert(jsonldUtils.isType(palgI, PN_T.PrivacyAlgorithmInstance), util.format('PP is not:%s :%j', PN_T.PrivacyAlgorithmInstance, result));
 
       let verified = PPUtils.verify(result, props);
       assert(!verified, util.format('PP was not valid?:%j', verified));

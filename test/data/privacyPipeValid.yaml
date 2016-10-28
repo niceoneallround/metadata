@@ -9,5 +9,4 @@ privacy_pipe:
     action: obfuscate
     privacy_algorithm_instance_template:
       - id: palgi-1
-        type: PrivacyAlgorithmInstance
         privacy_algorithm: http://md.id.webshield.io/privacy_algorithm/com/acme#palg-1
