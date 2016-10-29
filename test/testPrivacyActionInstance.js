@@ -64,7 +64,7 @@ describe('test Privacy Action Instance', function () {
 
   describe('2 Privacy Action Instance Template from a YAML file', function () {
 
-    it('2.1 should create instance if valid yaml format', function () {
+    it('2.1 should create an obfuscate instance if valid yaml format', function () {
 
       let md = YAML.safeLoad(readFile('privacyActionInstanceValid.yaml'));
       let props = { hostname: 'fake.hostname', domainName: 'fake.com', pa: 'fake.pa' };
@@ -76,7 +76,26 @@ describe('test Privacy Action Instance', function () {
       result.should.have.property(PN_P.privacyAction, 'action-1-id');
       result.should.have.property(PN_P.skipOrchestration, false);
       result.should.have.property(PN_P.obfuscationService, 'fake.os.id');
-      result.should.have.property(PN_P.action);
+      result.should.have.property(PN_P.action, PN_T.Obfuscate);
+      result.should.have.property(PN_P.schema);
+      result.should.have.property(PN_P.encryptKeyMDJWT);
+
+    }); // 2.1
+
+    it('2.2 should create a de-obfuscate instance if valid yaml format', function () {
+
+      let md = YAML.safeLoad(readFile('privacyActionInstanceDeobfuscate.yaml'));
+      let props = { hostname: 'fake.hostname', domainName: 'fake.com', pa: 'fake.pa' };
+      let result = PActionIUtils.YAML2Node(md.privacy_action_instance, props);
+
+      result.should.have.property('@id');
+      result.should.have.property('@type');
+      assert(jsonldUtils.isType(result, PN_T.PrivacyActionInstance), util.format('is not %s :%j', PN_T.PrivacyActionInstance, result));
+      result.should.have.property(PN_P.privacyAction, 'action-1-id');
+      result.should.have.property(PN_P.skipOrchestration, false);
+      result.should.have.property(PN_P.obfuscationService, 'fake.os.id');
+      result.should.have.property(PN_P.action, PN_T.Deobfuscate);
+      result.should.have.property(PN_P.privacyActionInstance2Deobfuscate, '1');
       result.should.have.property(PN_P.schema);
       result.should.have.property(PN_P.encryptKeyMDJWT);
 

@@ -11,3 +11,4 @@ privacy_algorithm_instance:
         - id: pa-instance-1
           privacy_action: privacy-action-id
           obfuscation_service: fake.id
+          action: obfuscate
