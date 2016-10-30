@@ -1,0 +1,16 @@
+version: 1
+privacy_pipe:
+  id: test-pp-deob
+  type: PrivacyPipe
+  description: test_description
+  client: client.com
+  destination: destination/url
+  obfuscation_context:
+    action: deobfuscate
+    privacy_action_instance_2_deobfuscate:
+      - id: paction-i-deob-1
+        action: deobfuscate
+        privacy_action_instance_2_deobfuscate: paction-i-ob-1
+      - id: paction-i-deob-2
+        action: deobfuscate
+        privacy_action_instance_2_deobfuscate: paction-i-ob-2
