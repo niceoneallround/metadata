@@ -5,6 +5,7 @@ privacy_pipe:
   description: test_description
   client: client.com
   destination: destination/url
+  version: '2'
   obfuscation_context:
     action: obfuscate
     privacy_algorithm_instance_template:

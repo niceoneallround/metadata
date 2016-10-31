@@ -18,7 +18,7 @@ describe('test Privacy Pipe', function () {
     return fs.readFileSync(__dirname + '/data/' + mdFile, 'utf8');
   }
 
-  describe('1 Privacy Pipe tests', function () {
+  describe('1 Privacy Pipe V2 tests', function () {
 
     it('1.1 should create an obfuscate PP from a valid PP YAML version', function () {
       let md = YAML.safeLoad(readFile('privacyPipeValid.yaml'));
@@ -93,7 +93,37 @@ describe('test Privacy Pipe', function () {
 
       let verified = PPUtils.verify(result, props);
       assert(!verified, util.format('PP was not valid?:%j', verified));
-    }); // 1.1
+    }); // 1.2
   }); // 1
+
+  describe('2 Privacy Pipe V1 tests', function () {
+
+    it('2.1 should create an obfuscate PP from a valid PP YAML version', function () {
+      let md = YAML.safeLoad(readFile('privacyPipeV1.yaml'));
+      let props = { hostname: 'fake.hostname', domainName: 'fake.com', issuer: 'theIssuer', creationTime: 'createTime' };
+      let result = PPUtils.YAML2Node(md.privacy_pipe, props);
+
+      //console.log(result);
+
+      result.should.have.property('@id');
+      result.should.have.property('@type');
+      assert(jsonldUtils.isType(result, PN_T.Metadata), util.format('PP is not Metadata:%j', result));
+      assert(jsonldUtils.isType(result, PN_T.PrivacyPipe), util.format('PP is not a PrivacyPipe:%j', result));
+      assert(!jsonldUtils.isType(result, PN_T.Resource), util.format('PP should not be a Resource:%j', result));
+      result.should.have.property(PN_P.version, '1');
+      result.should.have.property(PN_P.description, 'test_description');
+
+      result.should.have.property(PN_P.client);
+      result[PN_P.client].should.have.property('@value', 'client.com');
+
+      result.should.have.property(PN_P.destination);
+      result[PN_P.destination].should.have.property('@value', 'destination/url');
+
+      result.should.not.have.property(PN_P.obfuscationContext);
+
+      let verified = PPUtils.verify(result, props);
+      assert(!verified, util.format('PP was not valid?:%j', verified));
+    }); // 1.1
+  }); // 2
 
 });
