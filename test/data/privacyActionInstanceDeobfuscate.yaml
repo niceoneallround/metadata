@@ -6,6 +6,7 @@ privacy_action_instance:
   skip_orchestration: false
   action: 'deobfuscate'
   privacy_action_instance_2_deobfuscate: '1'
+  privacy_pipe_2_deobfuscate: '2'
   schema:  {
     $schema: 'http://experian.schema.webshield.io',
     'http//json-schema.org/title': 'http://experian.schema.webshield.io/type#Subject',

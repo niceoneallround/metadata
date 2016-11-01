@@ -11,6 +11,8 @@ privacy_pipe:
       - id: paction-i-deob-1
         action: deobfuscate
         privacy_action_instance_2_deobfuscate: paction-i-ob-1
+        privacy_pipe_2_deobfuscate: pipe-ob-1
       - id: paction-i-deob-2
         action: deobfuscate
         privacy_action_instance_2_deobfuscate: paction-i-ob-2
+        privacy_pipe_2_deobfuscate: pipe-ob-2
