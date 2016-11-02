@@ -78,7 +78,7 @@ describe('test Privacy Action Instance', function () {
       result.should.have.property(PN_P.obfuscationService, 'fake.os.id');
       result.should.have.property(PN_P.action, PN_T.Obfuscate);
       result.should.have.property(PN_P.schema);
-      result.should.have.property(PN_P.encryptKeyMDJWT);
+      result.should.have.property(PN_P.encryptKeyMDJWT, 'keymd_jwt');
 
     }); // 2.1
 
