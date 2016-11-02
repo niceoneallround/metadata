@@ -8,6 +8,7 @@ const PStepIUtils = require('../lib/privacyStepInstance').utils;
 const PNDataModel = require('data-models/lib/PNDataModel');
 const PN_P = PNDataModel.PROPERTY;
 const PN_T = PNDataModel.TYPE;
+const PPUtils = require('../lib/privacyPipe').utils;
 const should = require('should');
 const YAML = require('js-yaml');
 const util = require('util');
@@ -32,8 +33,9 @@ describe('test Privacy Step Instance', function () {
       pstep[PN_P.next] = null;
       pstep[PN_P.privacyAction] = [];
 
-      // create the privacy pipe, only use id so can be fake
-      let pp = { '@id': 'fake.pp.id' };
+      // create the privacy pipe for obfuscate
+      md = YAML.safeLoad(readFile('privacyPipeValid.yaml'));
+      let pp = PPUtils.YAML2Node(md.privacy_pipe, props);
 
       // create the privacy action instance template
       let psit = {};
@@ -67,7 +69,9 @@ describe('test Privacy Step Instance', function () {
       pstep[PN_P.next] = null;
 
       // create the privacy pipe, only use id so can be fake
-      let pp = { '@id': 'fake.pp.id' };
+      // create the privacy pipe for obfuscate
+      md = YAML.safeLoad(readFile('privacyPipeValid.yaml'));
+      let pp = PPUtils.YAML2Node(md.privacy_pipe, props);
 
       // create the privacy action instance template
       let pait = {};
@@ -96,6 +100,60 @@ describe('test Privacy Step Instance', function () {
       result.should.have.property(PN_P.next, 'next.com');
       result.should.have.property(PN_P.privacyActionInstance);
       result[PN_P.privacyActionInstance].length.should.be.equal(1);
+
+    }); // 1.2
+
+    it('1.3 should create a Privacy Step Instance with 2 privacy action instances for de-obfuscate', function () {
+
+      // create the privacy step, this includes one action
+      let md = YAML.safeLoad(readFile('privacyStepValid.yaml'));
+      let props = { hostname: 'fake.hostname', domainName: 'fake.com', pa: 'fake.pa' };
+      let pstep = PStepUtils.YAML2Node(md.privacy_step, props);
+
+      // blank out fields want to set from instance
+      pstep[PN_P.client] = null;
+      pstep[PN_P.next] = null;
+
+      // create the privacy pipe, only use id so can be fake
+      // create the privacy pipe for obfuscate
+      md = YAML.safeLoad(readFile('privacyPipeDeobfuscate.yaml'));
+      let pp = PPUtils.YAML2Node(md.privacy_pipe, props);
+
+      // create the privacy action instance templates
+      let pait1 = {};
+      pait1['@id'] = PNDataModel.ids.createPrivacyActionInstanceId('fake.hostname', 'pait_1');
+      pait1['@type'] = [PN_T.PrivacyActionInstance];
+      pait1[PN_P.privacyAction] = pstep[PN_P.privacyAction][0]['@id']; // only 1 action
+      pait1[PN_P.action] = PN_T.Deobfuscate;
+      pait1[PN_P.encryptKeyMdJWT] = 'jwt1';
+
+      let pait2 = {};
+      pait2['@id'] = PNDataModel.ids.createPrivacyActionInstanceId('fake.hostname', 'pait_2');
+      pait2['@type'] = [PN_T.PrivacyActionInstance];
+      pait2[PN_P.privacyAction] = pstep[PN_P.privacyAction][0]['@id']; // only 1 action
+      pait2[PN_P.action] = PN_T.Deobfuscate;
+      pait2[PN_P.encryptKeyMdJWT] = 'jwt2';
+
+      // create the privacy step instance template, include the privacy action instance
+      let psit = {};
+      psit['@id'] = PNDataModel.ids.createPrivacyStepInstanceId('fake.hostname', 'psit_1');
+      psit['@type'] = [PN_T.PrivacyStepInstance];
+      psit[PN_P.client] = 'client.com';
+      psit[PN_P.next] = 'next.com';
+      psit[PN_P.privacyActionInstance] = [pait1, pait2];
+
+      // create the privacy step instance
+      let result = PStepIUtils.create(psit, pstep, pp, props);
+      result.should.have.property('@id');
+      result.should.have.property('@type');
+      assert(jsonldUtils.isType(result, PN_T.Metadata), util.format('is not Metadata:%j', result));
+      assert(jsonldUtils.isType(result, PN_T.PrivacyStepInstance), util.format('is not PrivacyStepInstance:%j', result));
+
+      result.should.have.property(PN_P.nodeType, PN_T.Connector);
+      result.should.have.property(PN_P.client, 'client.com');
+      result.should.have.property(PN_P.next, 'next.com');
+      result.should.have.property(PN_P.privacyActionInstance);
+      result[PN_P.privacyActionInstance].length.should.be.equal(2);
 
     }); // 1.1
   }); // 1

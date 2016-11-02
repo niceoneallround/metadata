@@ -1,0 +1,16 @@
+version: 1
+privacy_step_instance:
+  id: ps-instance-1
+  privacy_step: privacy-step-id
+  client: client.com
+  next: next.com/url
+  description: allowed more than one action instance for de-obfuscate
+  privacy_action_instance:
+    - id: pa-instance-dob-1
+      privacy_action: privacy-action-id
+      obfuscation_service: fake.id
+      action: deobfuscate
+    - id: pa-instance-dob-2
+      privacy_action: privacy-action-id
+      obfuscation_service: fake.id
+      action: deobfuscate
