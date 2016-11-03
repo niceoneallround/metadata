@@ -1,0 +1,7 @@
+version: 1
+provision:
+  id: test-provision
+  type: provision
+  description: test_description
+  provisioned_metadata: test_md
+  privacy_pipe: test_pipe

@@ -46,7 +46,14 @@ describe('test MS dispatch works', function () {
       let result = MDUtils.YAML2Node(md.privacy_algorithm_instance, props);
       let error = MDUtils.verify(result, props);
       assert(!error, util.format('Privacy Algorithm Instance was not valid?:%j', error));
-    }); // 1.3
+    }); // 1.4
+
+    it('1.5 should dispatch to provision', function () {
+      let md = YAML.safeLoad(readFile('provisionValid.yaml'));
+      let result = MDUtils.YAML2Node(md.provision, props);
+      let error = MDUtils.verify(result, props);
+      assert(!error, util.format('node was not valid?:%j', error));
+    }); // 1.5
 
   }); // 1
 
@@ -82,6 +89,28 @@ describe('test MS dispatch works', function () {
       let node = MDUtils.JWTPayload2Node(payload, 'abc.com');
       node.should.have.property('@id', md['@id']);
     }); // 2.2
+
+    it('2.3 should handle a PROVISION_CLAIM', function () {
+      let yaml = YAML.safeLoad(readFile('provisionValid.yaml'));
+      let p = MDUtils.YAML2Node(yaml.provision, props);
+      let pId = p['@id'];
+
+      // create JWT payload - no need to sign
+      let payload = {};
+      payload[JWTClaims.PROVISION_CLAIM] = p;
+      payload[JWTClaims.PRIVACY_PIPE_CLAIM] = 'do-not-care';
+      payload.sub = pId;
+      p['@id'] = null; // so can check it is set
+      payload.iss = 'abc.com';
+      payload.iat = 12992929;
+
+      let node = MDUtils.JWTPayload2Node(payload, 'abc.com');
+      node.should.have.property('@id', pId);
+      node.should.have.property(PN_P.privacyPipe);
+      node.should.have.property(PN_P.provisionedMetadata);
+      node.should.have.property(PN_P.issuer);
+      node.should.have.property(PN_P.creationTime);
+    }); // 2.3
   }); // 2
 
   describe('3 MS YAML2Id tests', function () {
