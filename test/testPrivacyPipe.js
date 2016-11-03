@@ -81,8 +81,10 @@ describe('test Privacy Pipe', function () {
       oc.should.have.property('@type');
       assert(jsonldUtils.isType(oc, PN_T.ObfuscationContext), util.format('PP is not ObfuscationContext:%j', result));
       oc.should.have.property(PN_P.action, PN_T.Deobfuscate);
-      oc.should.not.have.property(PN_P.privacyAlgorithmInstanceTemplate);
+      oc.should.have.property(PN_P.destinationProvisionPipeURL);
+      oc.should.have.property(PN_P.destinationProvisionBasicAuthToken, 'basic1');
 
+      oc.should.not.have.property(PN_P.privacyAlgorithmInstanceTemplate);
       oc.should.have.property(PN_P.privacyActionInstance2Deobfuscate);
 
       oc[PN_P.privacyActionInstance2Deobfuscate].length.should.be.equal(2);
