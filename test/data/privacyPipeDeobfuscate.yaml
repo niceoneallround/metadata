@@ -5,10 +5,10 @@ privacy_pipe:
   description: test_description
   client: client.com
   destination: destination/url
-  destination_provision_pipe_url: url1
-  destination_provision_basic_auth_token: basic1
   obfuscation_context:
     action: deobfuscate
+    destination_provision_pipe_url: url1
+    destination_provision_basic_auth_token: basic1
     privacy_action_instance_2_deobfuscate:
       - id: paction-i-deob-1
         action: deobfuscate
