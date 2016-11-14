@@ -1,8 +1,14 @@
 /*jslint node: true, vars: true */
 
+//
+// THE V2 code does not change the model, just how it is constructed as
+// delegates to the step and actions as opposed to having code inline
+//
+
 const assert = require('assert');
 const fs = require('fs');
 const jsonldUtils = require('jsonld-utils/lib/jldUtils');
+const PACanons = require('../lib/privacyAlgorithmV2').canons;
 const PAUtils = require('../lib/privacyAlgorithmV2').utils;
 const PNDataModel = require('data-models/lib/PNDataModel');
 const PN_P = PNDataModel.PROPERTY;
@@ -11,7 +17,7 @@ const should = require('should');
 const YAML = require('js-yaml');
 const util = require('util');
 
-describe('test Privacy Algorithm V2', function () {
+describe('PAv2 Privacy Algorithm V2', function () {
   'use strict';
 
   function readFile(mdFile) {
@@ -50,6 +56,13 @@ describe('test Privacy Algorithm V2', function () {
       let verified = PAUtils.verify(result, props);
       assert(!verified, util.format('PA was not valid?:%j', verified));
     }); // 1.1
+
+    it('1.2 canon should be valid', function () {
+      let props = { hostname: 'fake.hostname', domainName: 'fake.com', issuer: 'theIssuer', creationTime: 'createTime' };
+      let result = PACanons.createPrivacyAlgorithm(props);
+      let verified = PAUtils.verify(result, props);
+      assert(!verified, util.format('PA was not valid?:%j', verified));
+    }); // 1.2
   }); // 1
 
 });
