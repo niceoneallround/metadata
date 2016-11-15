@@ -7,4 +7,4 @@ kms:
   algorithm:
     - https://ietf.org/rfc7518/A256GCM
   custom_props:
-    http://pn.schema.webshield.io/prop#dummy_prop
+    http://pn.schema.webshield.io/prop#dummy_prop: 'hello'

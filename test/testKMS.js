@@ -39,6 +39,9 @@ describe('KMS Resource Tests', function () {
       result.should.have.property(PN_P.issuer, 'theIssuer');
       result.should.have.property(PN_P.creationTime, 'createTime');
 
+      result.should.have.property(PN_P.customProps);
+      result[PN_P.customProps].should.have.property('http://pn.schema.webshield.io/prop#dummy_prop', 'hello');
+
       let verified = KMSUtils.verify(result, 'fake.hostname');
       assert(!verified, util.format('was not valid?:%j', verified));
     }); // 1.1
