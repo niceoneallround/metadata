@@ -115,10 +115,10 @@ describe('test MS dispatch works', function () {
 
   describe('3 MS YAML2Id tests', function () {
 
-    it('3.1 should dispatch to the correct ID constructor', function () {
+    it('3.1 should dispatch to the  privacy algorithm ID constructor', function () {
       let md = YAML.safeLoad(readFile('privacyAlgorithmV2Valid.yaml'));
       let result = MDUtils.YAML2Id(md.privacy_algorithm, props);
-      result.should.be.equal('https://md.pn.id.webshield.io/resource/com/fake#in-bound-palgorithm');
+      result.should.be.equal('https://md.pn.id.webshield.io/privacy_algorithm/com/fake#in-bound-palgorithm');
     }); // 3.1
 
     it('3.2 should dispatch to the correct ID constructor', function () {
@@ -133,6 +133,6 @@ describe('test MS dispatch works', function () {
       result.should.be.equal('https://md.pn.id.webshield.io/resource/com/fake#test-isa');
     }); // 3.2
 
-  }); // 1
+  }); // 3
 
 });
