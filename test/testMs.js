@@ -55,6 +55,13 @@ describe('test MS dispatch works', function () {
       assert(!error, util.format('node was not valid?:%j', error));
     }); // 1.5
 
+    it('1.6 should dispatch to KMS', function () {
+      let md = YAML.safeLoad(readFile('kmsValid.yaml'));
+      let result = MDUtils.YAML2Node(md.kms, props);
+      let error = MDUtils.verify(result, props);
+      assert(!error, util.format('node was not valid?:%j', error));
+    }); // 1.6
+
   }); // 1
 
   describe('2 JWTPayload2Node tests', function () {
@@ -131,7 +138,13 @@ describe('test MS dispatch works', function () {
       let md = YAML.safeLoad(readFile('ISAlgorithmValid.yaml'));
       let result = MDUtils.YAML2Id(md.is_algorithm, props);
       result.should.be.equal('https://md.pn.id.webshield.io/resource/com/fake#test-isa');
-    }); // 3.2
+    }); // 3.3
+
+    it('3.4 should dispatch to the KMS ID constructor', function () {
+      let md = YAML.safeLoad(readFile('kmsValid.yaml'));
+      let result = MDUtils.YAML2Id(md.kms, props);
+      result.should.be.equal('https://md.pn.id.webshield.io/kms/com/fake#kms-1');
+    }); // 3.4
 
   }); // 3
 

@@ -25,7 +25,7 @@ describe('test Privacy Algorithm', function () {
       let props = { hostname: 'fake.hostname', domainName: 'fake.com', issuer: 'theIssuer', creationTime: 'createTime' };
       let result = PAUtils.YAML2Node(md.privacy_algorithm, props);
 
-      result.should.have.property('@id');
+      result.should.have.property('@id', 'https://md.pn.id.webshield.io/privacy_algorithm/com/fake#in-bound-pa');
       result.should.have.property('@type');
       assert(jsonldUtils.isType(result, PN_T.Metadata), util.format('PA is not Metadata:%j', result));
       assert(jsonldUtils.isType(result, PN_T.PrivacyAlgorithm), util.format('PA is not PrivacyAlgorithm:%j', result));

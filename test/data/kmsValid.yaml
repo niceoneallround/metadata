@@ -1,0 +1,10 @@
+version: 1
+kms:
+  id: kms-1
+  type: kms
+  description: test_description
+  provider: https://kms.test.webshield.io/insecure
+  algorithm:
+    - https://ietf.org/rfc7518/A256GCM
+  custom_props:
+    http://pn.schema.webshield.io/prop#dummy_prop

@@ -1,6 +1,6 @@
 {
   "name": "metadata",
-  "version": "0.1.16",
+  "version": "0.1.17",
   "description": "Metadata constructors and validators",
   "main": "index.js",
   "scripts": {
@@ -29,7 +29,8 @@
     "gulp-nsp": "^2.4.2",
     "js-yaml": "^3.6.1",
     "jshint": "^2.9.2",
-    "jshint-stylish": "^2.2.0"
+    "jshint-stylish": "^2.2.0",
+    "yargs": "^6.4.0"
   },
   "dependencies": {
     "data-models": "git://github.com/niceoneallround/data-models.git",
