@@ -3,6 +3,7 @@
 const assert = require('assert');
 const fs = require('fs');
 const jsonldUtils = require('jsonld-utils/lib/jldUtils');
+const KMSCanons = require('../lib/KMS').canons;
 const KMSUtils = require('../lib/KMS').utils;
 const PNDataModel = require('data-models/lib/PNDataModel');
 const PN_P = PNDataModel.PROPERTY;
@@ -25,7 +26,7 @@ describe('KMS Resource Tests', function () {
       let props = { hostname: 'fake.hostname', domainName: 'fake.com', issuer: 'theIssuer', creationTime: 'createTime' };
       let result = KMSUtils.YAML2Node(md.kms, props);
 
-      console.log(result);
+      //console.log(result);
 
       result.should.have.property('@id');
       result.should.have.property('@type');
@@ -45,6 +46,14 @@ describe('KMS Resource Tests', function () {
       let verified = KMSUtils.verify(result, 'fake.hostname');
       assert(!verified, util.format('was not valid?:%j', verified));
     }); // 1.1
+
+    it('1.2 canon should be valid', function () {
+      let props = { hostname: 'fake.hostname', domainName: 'fake.com', issuer: 'theIssuer', creationTime: 'createTime' };
+      let result = KMSCanons.createTestKMS(props);
+      console.log(result);
+      let verified = KMSUtils.verify(result, props);
+      assert(!verified, util.format('was not valid?:%j', verified));
+    }); // 1.2
   }); // 1
 
 });
