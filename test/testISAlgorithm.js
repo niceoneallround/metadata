@@ -36,6 +36,8 @@ describe('test Identity Syndicatiton Algorithm', function () {
       result.should.have.property(PN_P.referenceSource, 'test_reference_source');
       result.should.have.property(PN_P.subjectType, 'test_subject_type');
       result.should.have.property(PN_P.description, 'test_description');
+      result.should.have.property(PN_P.issuer, 'theIssuer');
+      result.should.have.property(PN_P.creationTime, 'createTime');
 
       let verified = ISAUtils.verify(result, 'fake.hostname');
       assert(!verified, util.format('ISA was not valid?:%j', verified));

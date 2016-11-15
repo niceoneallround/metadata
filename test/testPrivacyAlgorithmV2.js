@@ -38,6 +38,8 @@ describe('PAv2 Privacy Algorithm V2', function () {
       assert(jsonldUtils.isType(result, PN_T.Resource), util.format('PA is not Resource:%j', result));
       result.should.have.property(PN_P.description);
       result.should.have.property(PN_P.version, '2');
+      result.should.have.property(PN_P.issuer, 'theIssuer');
+      result.should.have.property(PN_P.creationTime, 'createTime');
 
       result.should.have.property(PN_P.privacyStep);
       result[PN_P.privacyStep].length.should.be.equal(1);

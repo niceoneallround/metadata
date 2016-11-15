@@ -36,6 +36,8 @@ describe('test Reference Source', function () {
       result.should.have.property(PN_P.provisionPipeURL);
       result.should.have.property(PN_P.subjectQueryURL);
       result.should.have.property(PN_P.description);
+      result.should.have.property(PN_P.issuer, 'theIssuer');
+      result.should.have.property(PN_P.creationTime, 'createTime');
 
       let verified = RSUtils.verify(result, 'fake.hostname');
       assert(!verified, util.format('RS was not valid?:%j', verified));
