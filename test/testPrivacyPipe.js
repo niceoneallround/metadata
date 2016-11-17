@@ -3,6 +3,7 @@
 const assert = require('assert');
 const fs = require('fs');
 const jsonldUtils = require('jsonld-utils/lib/jldUtils');
+const PPCanons = require('../lib/privacyPipe').canons;
 const PPUtils = require('../lib/privacyPipe').utils;
 const PNDataModel = require('data-models/lib/PNDataModel');
 const PN_P = PNDataModel.PROPERTY;
@@ -95,6 +96,13 @@ describe('test Privacy Pipe', function () {
 
       let verified = PPUtils.verify(result, props);
       assert(!verified, util.format('PP was not valid?:%j', verified));
+    }); // 1.2
+
+    it('1.3 canon should be valid', function () {
+      let props = { hostname: 'fake.hostname', domainName: 'fake.com', issuer: 'theIssuer', creationTime: 'createTime' };
+      let result = PPCanons.createPrivacyPipe(props);
+      let verified = PPUtils.verify(result, props);
+      assert(!verified, util.format('was not valid?:%j', verified));
     }); // 1.2
   }); // 1
 
