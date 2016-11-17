@@ -3,7 +3,7 @@ kms:
   id: kms-1
   type: kms
   description: test_description
-  provider: https://kms.test.webshield.io/insecure
+  provider: https://kms.webshield.io/test
   algorithm:
     - https://ietf.org/rfc7518/A256GCM
   custom_props:
