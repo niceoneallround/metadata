@@ -1,0 +1,7 @@
+version: 1
+organization:
+  id: test-org
+  type: organization
+  name: test_name
+  description: test_description
+  domain_name: test_domain_name 
