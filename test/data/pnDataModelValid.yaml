@@ -1,0 +1,8 @@
+version: 1
+pndatamodel:
+  id: pnd-1
+  type: pndatamodel
+  description: test_description
+  json_schema: 'test_schema'
+  jsonld_context: 'test_jsonld_context'
+  schema_prefix: 'test_schema_prefix'
