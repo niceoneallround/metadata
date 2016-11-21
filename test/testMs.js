@@ -62,6 +62,13 @@ describe('test MS dispatch works', function () {
       assert(!error, util.format('node was not valid?:%j', error));
     }); // 1.6
 
+    it('1.7 should dispatch to PNDataModel', function () {
+      let md = YAML.safeLoad(readFile('pnDataModelValid.yaml'));
+      let result = MDUtils.YAML2Node(md.pndatamodel, props);
+      let error = MDUtils.verify(result, props);
+      assert(!error, util.format('node was not valid?:%j', error));
+    }); // 1.6
+
   }); // 1
 
   describe('2 JWTPayload2Node tests', function () {
@@ -144,6 +151,12 @@ describe('test MS dispatch works', function () {
       let md = YAML.safeLoad(readFile('kmsValid.yaml'));
       let result = MDUtils.YAML2Id(md.kms, props);
       result.should.be.equal('https://md.pn.id.webshield.io/kms/com/fake#kms-1');
+    }); // 3.4
+
+    it('3.6 should dispatch to the PNDataModel ID constructor', function () {
+      let md = YAML.safeLoad(readFile('pnDataModelValid.yaml'));
+      let result = MDUtils.YAML2Id(md.pndatamodel, props);
+      result.should.be.equal('https://md.pn.id.webshield.io/pn_data_model/com/fake#pnd-1');
     }); // 3.4
 
   }); // 3
