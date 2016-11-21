@@ -67,7 +67,14 @@ describe('test MS dispatch works', function () {
       let result = MDUtils.YAML2Node(md.pndatamodel, props);
       let error = MDUtils.verify(result, props);
       assert(!error, util.format('node was not valid?:%j', error));
-    }); // 1.6
+    }); // 1.7
+
+    it('1.8 should dispatch to Organization', function () {
+      let md = YAML.safeLoad(readFile('organizationValid.yaml'));
+      let result = MDUtils.YAML2Node(md.organization, props);
+      let error = MDUtils.verify(result, props);
+      assert(!error, util.format('node was not valid?:%j', error));
+    }); // 1.8
 
   }); // 1
 
@@ -153,11 +160,17 @@ describe('test MS dispatch works', function () {
       result.should.be.equal('https://md.pn.id.webshield.io/kms/com/fake#kms-1');
     }); // 3.4
 
-    it('3.6 should dispatch to the PNDataModel ID constructor', function () {
+    it('3.5 should dispatch to the PNDataModel ID constructor', function () {
       let md = YAML.safeLoad(readFile('pnDataModelValid.yaml'));
       let result = MDUtils.YAML2Id(md.pndatamodel, props);
       result.should.be.equal('https://md.pn.id.webshield.io/pn_data_model/com/fake#pnd-1');
-    }); // 3.4
+    }); // 3.5
+
+    it('3.6 should dispatch to the Organization ID constructor', function () {
+      let md = YAML.safeLoad(readFile('organizationValid.yaml'));
+      let result = MDUtils.YAML2Id(md.organization, props);
+      result.should.be.equal('https://md.pn.id.webshield.io/organization/com/fake#test-org');
+    }); // 3.6
 
   }); // 3
 
