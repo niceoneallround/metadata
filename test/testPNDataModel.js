@@ -48,7 +48,6 @@ describe('PNDataModel Metadata Tests', function () {
     it('1.2 canon should be valid', function () {
       let props = { hostname: 'fake.hostname', domainName: 'fake.com', issuer: 'theIssuer', creationTime: 'createTime' };
       let result = PNDataModelCanons.createTestPNDataModel(props);
-      console.log(result);
       let verified = PNDataModelUtils.verify(result, props);
       assert(!verified, util.format('was not valid?:%j', verified));
     }); // 1.2
