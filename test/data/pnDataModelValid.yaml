@@ -4,5 +4,7 @@ pndatamodel:
   type: pndatamodel
   description: test_description
   json_schema: 'test_schema'
-  jsonld_context: 'test_jsonld_context'
+  jsonld_context:
+    schema: 'https://schema.org/'
+    name: 'schema:name'
   schema_prefix: 'test_schema_prefix'
