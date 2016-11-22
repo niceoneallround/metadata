@@ -76,6 +76,13 @@ describe('test MS dispatch works', function () {
       assert(!error, util.format('node was not valid?:%j', error));
     }); // 1.8
 
+    it('1.9 should dispatch to IngestPrivacyAgent', function () {
+      let md = YAML.safeLoad(readFile('ingestPrivacyAgentValid.yaml'));
+      let result = MDUtils.YAML2Node(md.ingest_privacy_agent, props);
+      let error = MDUtils.verify(result, props);
+      assert(!error, util.format('node was not valid?:%j', error));
+    }); // 1.8
+
   }); // 1
 
   describe('2 JWTPayload2Node tests', function () {
@@ -171,6 +178,12 @@ describe('test MS dispatch works', function () {
       let result = MDUtils.YAML2Id(md.organization, props);
       result.should.be.equal('https://md.pn.id.webshield.io/organization/com/fake#test-org');
     }); // 3.6
+
+    it('3.7 should dispatch to the Ingest Privacy Agent ID constructor', function () {
+      let md = YAML.safeLoad(readFile('ingestPrivacyAgentValid.yaml'));
+      let result = MDUtils.YAML2Id(md.ingest_privacy_agent, props);
+      result.should.be.equal('https://md.pn.id.webshield.io/ingest_privacy_agent/com/fake#ingest-1');
+    }); // 3.7
 
   }); // 3
 

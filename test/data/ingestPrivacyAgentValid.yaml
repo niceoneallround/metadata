@@ -1,0 +1,7 @@
+version: 1
+ingest_privacy_agent:
+  id: ingest-1
+  type: ingestprivacyagent
+  description: test_description
+  pndatamodel: test_pndatamodel
+  privacy_algorithm: test_privacy_algorithm
