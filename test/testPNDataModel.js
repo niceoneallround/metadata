@@ -40,7 +40,7 @@ describe('PNDataModel Metadata Tests', function () {
       result.should.have.property(PN_P.jsonSchema);
       result.should.have.property(PN_P.jsonldContext);
       (typeof result[PN_P.jsonldContext]).should.be.equal('string');
-      result.should.have.property(PN_P.jsonSchemaPrefix);
+      result.should.have.property(PN_P.schemaPrefix);
 
       let verified = PNDataModelUtils.verify(result, props);
       assert(!verified, util.format('was not valid?:%j', verified));
