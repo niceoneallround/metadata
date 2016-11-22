@@ -170,7 +170,7 @@ describe('test MS dispatch works', function () {
     it('3.5 should dispatch to the PNDataModel ID constructor', function () {
       let md = YAML.safeLoad(readFile('pnDataModelValid.yaml'));
       let result = MDUtils.YAML2Id(md.pndatamodel, props);
-      result.should.be.equal('https://md.pn.id.webshield.io/pn_data_model/com/fake#pnd-1');
+      result.should.be.equal('https://md.pn.id.webshield.io/pndatamodel/com/fake#pnd-1');
     }); // 3.5
 
     it('3.6 should dispatch to the Organization ID constructor', function () {
