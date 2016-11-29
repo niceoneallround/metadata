@@ -1,10 +1,11 @@
 {
   "name": "metadata",
-  "version": "0.1.24",
+  "version": "0.1.25",
   "description": "Metadata constructors and validators",
   "main": "index.js",
   "scripts": {
-    "test": "gulp test"
+    "test": "gulp test",
+    "build": "gulp test"
   },
   "repository": {
     "type": "git",
