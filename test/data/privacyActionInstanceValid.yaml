@@ -9,4 +9,4 @@ privacy_action_instance:
     $schema: 'http://experian.schema.webshield.io',
     'http//json-schema.org/title': 'http://experian.schema.webshield.io/type#Subject',
     'http://json-schema.org/type': 'object' }
-  encrypt_key_md_jwt: 'keymd_jwt'
+  encrypt_key_md: http://md.pn.id.webshield.io/encrypt_key_md/com/acme#key-1

@@ -43,8 +43,7 @@ describe('test Privacy Action Instance', function () {
       pait[PN_P.action] = PN_T.Obfuscate;
       pait[PN_P.obfuscationService] = 'fake.os.id';
       pait[PN_P.schema] = 'a schema';
-      pait[PN_P.encryptKeyMDJWT] = 'keymdjwt';
-      pait[PN_P.encryptKeyMD] = 'keymd';
+      pait[PN_P.encryptKeyMD] = 'keymdId';
 
       // create the privacy action instance
       let result = PActionIUtils.create(pait, paction, pp, { hostname: 'fake.hostname', domainName: 'fake.domain.name' });
@@ -56,8 +55,7 @@ describe('test Privacy Action Instance', function () {
       result.should.have.property(PN_P.action, PN_T.Obfuscate);
       result.should.have.property(PN_P.obfuscationService, 'fake.os.id');
       result.should.have.property(PN_P.schema, 'a schema');
-      result.should.have.property(PN_P.encryptKeyMD, 'keymd');
-      result.should.have.property(PN_P.encryptKeyMDJWT, 'keymdjwt');
+      result.should.have.property(PN_P.encryptKeyMD, 'keymdId');
 
     }); // 1.1
   }); // 1
@@ -78,7 +76,7 @@ describe('test Privacy Action Instance', function () {
       result.should.have.property(PN_P.obfuscationService, 'fake.os.id');
       result.should.have.property(PN_P.action, PN_T.Obfuscate);
       result.should.have.property(PN_P.schema);
-      result.should.have.property(PN_P.encryptKeyMDJWT, 'keymd_jwt');
+      result.should.have.property(PN_P.encryptKeyMD, 'http://md.pn.id.webshield.io/encrypt_key_md/com/acme#key-1');
 
     }); // 2.1
 
@@ -98,7 +96,7 @@ describe('test Privacy Action Instance', function () {
       result.should.have.property(PN_P.privacyActionInstance2Deobfuscate, '1');
       result.should.have.property(PN_P.privacyPipe2Deobfuscate, '2');
       result.should.have.property(PN_P.schema);
-      result.should.have.property(PN_P.encryptKeyMDJWT);
+      result.should.have.property(PN_P.encryptKeyMD, 'http://md.pn.id.webshield.io/encrypt_key_md/com/acme#key-1');
 
     }); // 2.1
   }); // describe 2
