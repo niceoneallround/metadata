@@ -1,0 +1,9 @@
+version: 1
+encrypt_key_metadata:
+  id: ekm-1
+  type: encryptkeymetadata
+  description: raw data is an object in JSON Web Key Format holding a base64 clear text key. If an object code will auto convert to bas64
+  raw_encrypt_key_metadata:
+    kty: oct
+    alg: AES_256
+    k: 2kW2pzVjo1n+hpDuNnZTRy4CjXqAkgMQ1MtpWZFd4FI=

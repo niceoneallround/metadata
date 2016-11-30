@@ -9,7 +9,7 @@ const PN_P = PNDataModel.PROPERTY;
 const YAML = require('js-yaml');
 const util = require('util');
 
-describe('test MS dispatch works', function () {
+describe('MD test MD dispatch works', function () {
   'use strict';
 
   let props = { hostname: 'fake.hostname', domainName: 'fake.com', issuer: 'abc.com', creationTime: '1221' };
@@ -81,7 +81,14 @@ describe('test MS dispatch works', function () {
       let result = MDUtils.YAML2Node(md.ingest_privacy_agent, props);
       let error = MDUtils.verify(result, props);
       assert(!error, util.format('node was not valid?:%j', error));
-    }); // 1.8
+    }); // 1.9
+
+    it('1.10 should dispatch to EncryptKeyMetadata', function () {
+      let md = YAML.safeLoad(readFile('encryptKeyMDValid.yaml'));
+      let result = MDUtils.YAML2Node(md.encrypt_key_metadata, props);
+      let error = MDUtils.verify(result, props);
+      assert(!error, util.format('node was not valid?:%j', error));
+    }); // 1.9
 
   }); // 1
 

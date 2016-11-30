@@ -41,7 +41,7 @@ describe('IPA Ingest Privacy Agent tests', function () {
       result.should.have.property(PN_P.pnDataModel, 'test_pndatamodel');
       result.should.have.property(PN_P.privacyAlgorithm, 'test_privacy_algorithm');
 
-      let verified = IPAUtils.verify(result, 'fake.hostname');
+      let verified = IPAUtils.verify(result, props);
       assert(!verified, util.format('verify was not valid?:%j', verified));
     }); // 1.1
 
