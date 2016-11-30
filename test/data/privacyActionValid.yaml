@@ -5,7 +5,8 @@ privacy_action:
   content_obfuscation_algorithm: A256GCM
   obfuscation_provider: http://ionicsecurity.com
   obfuscation_service: fake.id
-  kms: http://md.pn.id.webshield.io/resource/com/acme#my-kms
+  kms: http://md.pn.id.webshield.io/kms/com/acme#my-kms
+  encrypt_key_md: http://md.pn.id.webshied.io/encrypt_key_md/com/acme#key-1
   skip_orchestration: false
   schema:  {
     $schema: 'http://experian.schema.webshield.io',

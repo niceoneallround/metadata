@@ -36,6 +36,7 @@ describe('test Privacy Action', function () {
       result.should.have.property(PN_P.obfuscationProvider);
       result.should.have.property(PN_P.obfuscationService);
       result.should.have.property(PN_P.kms);
+      result.should.have.property(PN_P.encryptKeyMD);
       result.should.have.property(PN_P.skipOrchestration);
       result.should.have.property(PN_P.schema);
 
