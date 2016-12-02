@@ -11,7 +11,7 @@ const should = require('should');
 const YAML = require('js-yaml');
 const util = require('util');
 
-describe('test Privacy Action', function () {
+describe('PACTION test Privacy Action', function () {
   'use strict';
 
   function readFile(mdFile) {
@@ -33,10 +33,11 @@ describe('test Privacy Action', function () {
 
       result.should.have.property(PN_P.privacyStep, 'fake.pstep');
       result.should.have.property(PN_P.contentObfuscationAlgorithm);
+      result.should.have.property(PN_P.contentEncryptKeyMD, 'http://md.pn.id.webshied.io/encrypt_key_md/com/acme#content-key-1');
+      result.should.have.property(PN_P.keyEncryptKeyMD, 'http://md.pn.id.webshied.io/encrypt_key_md/com/acme#key-key-1');
       result.should.have.property(PN_P.obfuscationProvider);
       result.should.have.property(PN_P.obfuscationService);
       result.should.have.property(PN_P.kms);
-      result.should.have.property(PN_P.encryptKeyMD);
       result.should.have.property(PN_P.skipOrchestration);
       result.should.have.property(PN_P.schema);
 

@@ -12,7 +12,7 @@ const should = require('should');
 const YAML = require('js-yaml');
 const util = require('util');
 
-describe('test Privacy Action Instance', function () {
+describe('PACTIONI test Privacy Action Instance', function () {
   'use strict';
 
   function readFile(mdFile) {
@@ -55,7 +55,8 @@ describe('test Privacy Action Instance', function () {
       result.should.have.property(PN_P.action, PN_T.Obfuscate);
       result.should.have.property(PN_P.obfuscationService, 'fake.os.id');
       result.should.have.property(PN_P.schema, 'a schema');
-      result.should.have.property(PN_P.encryptKeyMD, 'keymdId');
+      result.should.have.property(PN_P.contentEncryptKeyMD, 'http://md.pn.id.webshied.io/encrypt_key_md/com/acme#content-key-1');
+      result.should.have.property(PN_P.keyEncryptKeyMD, 'http://md.pn.id.webshied.io/encrypt_key_md/com/acme#key-key-1');
 
     }); // 1.1
   }); // 1
@@ -76,8 +77,8 @@ describe('test Privacy Action Instance', function () {
       result.should.have.property(PN_P.obfuscationService, 'fake.os.id');
       result.should.have.property(PN_P.action, PN_T.Obfuscate);
       result.should.have.property(PN_P.schema);
-      result.should.have.property(PN_P.encryptKeyMD, 'http://md.pn.id.webshield.io/encrypt_key_md/com/acme#key-1');
-
+      result.should.have.property(PN_P.contentEncryptKeyMD, 'http://md.pn.id.webshied.io/encrypt_key_md/com/acme#content-key-1');
+      result.should.have.property(PN_P.keyEncryptKeyMD, 'http://md.pn.id.webshied.io/encrypt_key_md/com/acme#key-key-1');
     }); // 2.1
 
     it('2.2 should create a de-obfuscate instance if valid yaml format', function () {
@@ -96,7 +97,8 @@ describe('test Privacy Action Instance', function () {
       result.should.have.property(PN_P.privacyActionInstance2Deobfuscate, '1');
       result.should.have.property(PN_P.privacyPipe2Deobfuscate, '2');
       result.should.have.property(PN_P.schema);
-      result.should.have.property(PN_P.encryptKeyMD, 'http://md.pn.id.webshield.io/encrypt_key_md/com/acme#key-1');
+      result.should.have.property(PN_P.contentEncryptKeyMD, 'http://md.pn.id.webshied.io/encrypt_key_md/com/acme#content-key-1');
+      result.should.have.property(PN_P.keyEncryptKeyMD, 'http://md.pn.id.webshied.io/encrypt_key_md/com/acme#key-key-1');
 
     }); // 2.1
   }); // describe 2
