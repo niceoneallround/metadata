@@ -1,6 +1,7 @@
 /*jslint node: true, vars: true */
 
 const assert = require('assert');
+const BaseSubjectPNDataModel = require('data-models/lib/BaseSubjectPNDataModel');
 const fs = require('fs');
 const jsonldUtils = require('jsonld-utils/lib/jldUtils');
 const PActionUtils = require('../lib/privacyAction').utils;
@@ -104,7 +105,33 @@ describe('PACTIONI test Privacy Action Instance', function () {
       result.should.have.property(PN_P.contentEncryptKeyMD, 'http://md.pn.id.webshied.io/encrypt_key_md/com/acme#content-key-1');
       result.should.have.property(PN_P.keyEncryptKeyMD, 'http://md.pn.id.webshied.io/encrypt_key_md/com/acme#key-key-1');
 
-    }); // 2.1
+    }); // 2.2
+
+    it('2.3 create from YAML format passing in a schema with typeof object as was having a bug with this', function () {
+
+      let schema = BaseSubjectPNDataModel.model.JSON_SCHEMA;
+      let props = { hostname: 'fake.hostname', domainName: 'fake.com', pa: 'fake.pa' };
+      let paiYAML = {
+        id: 'privacy-action-instance-1',
+        privacy_action: 'action-1-id',
+        obfuscation_service: 'fake.os.id',
+        skip_orchestration: false,
+        action: 'obfuscate',
+        schema: schema,
+        encrypt_key_md_jwt: 'keymd_jwt',
+      };
+
+      let result = PActionIUtils.YAML2Node(paiYAML, props);
+
+      result.should.have.property('@id');
+      result.should.have.property('@type');
+      assert(jsonldUtils.isType(result, PN_T.PrivacyActionInstance), util.format('is not %s :%j', PN_T.PrivacyActionInstance, result));
+      (typeof result[PN_P.schema]).should.be.equal('string');
+      let js = JSON.parse(result[PN_P.schema]);
+      js.should.have.property('$schema');
+      js.should.have.property('title');
+
+    }); // 2.3
   }); // describe 2
 
 });
