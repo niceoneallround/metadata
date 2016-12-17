@@ -26,8 +26,6 @@ describe('PNDataModel Metadata Tests', function () {
       let props = { hostname: 'fake.hostname', domainName: 'fake.com', issuer: 'theIssuer', creationTime: 'createTime' };
       let result = PNDataModelUtils.YAML2Node(md.pndatamodel, props);
 
-      //console.log(result);
-
       result.should.have.property('@id');
       result.should.have.property('@type');
       assert(jsonldUtils.isType(result, PN_T.Metadata), util.format('is not Metadata:%j', result));
@@ -38,8 +36,15 @@ describe('PNDataModel Metadata Tests', function () {
       result.should.have.property(PN_P.creationTime, 'createTime');
 
       result.should.have.property(PN_P.jsonSchema);
+      (typeof result[PN_P.jsonSchema]).should.be.equal('string');
+      let js = JSON.parse(result[PN_P.jsonSchema]);
+      js.should.have.property('$schema');
+
       result.should.have.property(PN_P.jsonldContext);
       (typeof result[PN_P.jsonldContext]).should.be.equal('string');
+      let jc = JSON.parse(result[PN_P.jsonldContext]);
+      jc.should.have.property('id');
+
       result.should.have.property(PN_P.schemaPrefix);
 
       let verified = PNDataModelUtils.verify(result, props);

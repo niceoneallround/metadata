@@ -3,8 +3,86 @@ pndatamodel:
   id: pnd-1
   type: pndatamodel
   description: test_description
-  json_schema: 'test_schema'
+  json_schema:
+    $schema: 'http://json-schema.org/draft-04/schema#'
+    id: 'https://subject.pn.schema.webshield.io'
+    definitions:
+      'https://schema.org/PostalAddress':
+        type: 'object'
+        title: 'https://schema.org/PostalAddress'
+        properties:
+          '@id':
+            type: 'string'
+          '@type':
+            type: 'array'
+          'https://schema.org/addressCountry':
+            type: 'string'
+          'https://schema.org/addressLocality':
+            type: 'string'
+          'https://schema.org/addressRegion':
+            type: 'string'
+          'https://schema.org/postalCode':
+            type: 'string'
+          'https://schema.org/postOfficeBoxNumber':
+            type: 'string'
+          'https://schema.org/streetAddress':
+            type: 'string'
+        required: ['@id', '@type']
+    title: 'https://subject.pn.schema.webshield.io/type#Subject'
+    type: 'object'
+    properties:
+      '@id':
+        type: 'string'
+      '@type':
+        type: 'array'
+      'https://schema.org/deathDate':
+        type: 'string'
+      'https://schema.org/birthDate':
+        type: 'string'
+      'https://schema.org/email':
+        type: 'string'
+      'https://schema.org/telephone':
+        type: 'string'
+      'https://schema.org/gender':
+        type: 'string'
+      'https://schema.org/givenName':
+        type: 'string'
+      'https://schema.org/familyName':
+        type: 'string'
+      'https://schema.org/additionalName':
+        type: 'string'
+      'https://schema.org/taxID':
+        type: 'string'
+      'http://pn.schema.webshield.io/prop#sourceID':
+        type: 'string'
+      'https://schema.org/address':
+        $ref: '#/definitions/https://schema.org/PostalAddress'
+    required: ['@id', '@type', 'http://pn.schema.webshield.io/prop#sourceID']
   jsonld_context:
-    schema: 'https://schema.org/'
-    name: 'schema:name'
+    id: '@id'
+    type: '@type'
+    MINE_T: https://dc.test.schema.webshield.io/type#
+    MINE_P: https://dc.test.schema.webshield.io/prop#
+    PN_P: http://pn.schema.webshield.io/prop#
+    schema: https://schema.org/
+    address: schema:address
+    addressCountry: schema:addressCountry
+    addressLocality: schema:addressLocality
+    addressRegion: schema:addressRegion
+    additionalName: schema:additionalName
+    birthDate: schema:birthDate
+    deathDate: schema:deathDate
+    description: schema:description
+    email: schema:email
+    telephone: schema:telephone
+    gender: schema:gender
+    givenName: schema:givenName
+    familyName: schema:familyName
+    MemberID: MINE_P:MemberID
+    postalCode: schema:postalCode
+    postOfficeBoxNumber: schema:postOfficeBoxNumber
+    sourceID: PN_P:sourceID
+    taxID: schema:taxID
+    PostalAddress: schema:PostalAddress
+    Subject: MINE_T:Subject
   schema_prefix: 'test_schema_prefix'

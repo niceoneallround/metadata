@@ -97,6 +97,10 @@ describe('PACTIONI test Privacy Action Instance', function () {
       result.should.have.property(PN_P.privacyActionInstance2Deobfuscate, '1');
       result.should.have.property(PN_P.privacyPipe2Deobfuscate, '2');
       result.should.have.property(PN_P.schema);
+      (typeof result[PN_P.schema]).should.be.equal('string');
+      let js = JSON.parse(result[PN_P.schema]);
+      js.should.have.property('$schema');
+
       result.should.have.property(PN_P.contentEncryptKeyMD, 'http://md.pn.id.webshied.io/encrypt_key_md/com/acme#content-key-1');
       result.should.have.property(PN_P.keyEncryptKeyMD, 'http://md.pn.id.webshied.io/encrypt_key_md/com/acme#key-key-1');
 
