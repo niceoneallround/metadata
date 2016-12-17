@@ -5,6 +5,7 @@ const fs = require('fs');
 const jsonldUtils = require('jsonld-utils/lib/jldUtils');
 const PStepUtils = require('../lib/privacyStep').utils;
 const PStepIUtils = require('../lib/privacyStepInstance').utils;
+const PStepICanons = require('../lib/privacyStepInstance').canons;
 const PNDataModel = require('data-models/lib/PNDataModel');
 const PN_P = PNDataModel.PROPERTY;
 const PN_T = PNDataModel.TYPE;
@@ -13,7 +14,7 @@ const should = require('should');
 const YAML = require('js-yaml');
 const util = require('util');
 
-describe('test Privacy Step Instance', function () {
+describe('PSI test Privacy Step Instance', function () {
   'use strict';
 
   function readFile(mdFile) {
@@ -177,5 +178,16 @@ describe('test Privacy Step Instance', function () {
 
     }); // 2.1
   }); // describe 2
+
+  describe('3 Privacy Step Instance Canon Tests', function () {
+
+    it('3 canon should be valid', function () {
+      let props = { hostname: 'fake.hostname', domainName: 'fake.com', issuer: 'theIssuer', creationTime: 'createTime' };
+      let result = PStepICanons.createObfuscatePrivacyStepI(props);
+      assert(jsonldUtils.isType(result, PN_T.PrivacyStepInstance), util.format('is not %s :%j', PN_T.PrivacyStepInstance, result));
+      console.log(result);
+    }); // 3.1
+
+  }); // describe 3
 
 });
