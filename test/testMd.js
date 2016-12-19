@@ -88,7 +88,14 @@ describe('MD test MD dispatch works', function () {
       let result = MDUtils.YAML2Node(md.encrypt_key_metadata, props);
       let error = MDUtils.verify(result, props);
       assert(!error, util.format('node was not valid?:%j', error));
-    }); // 1.9
+    }); // 1.10
+
+    it('1.11 should dispatch to Obfuscation Service', function () {
+      let md = YAML.safeLoad(readFile('obfuscationServiceValid.yaml'));
+      let result = MDUtils.YAML2Node(md.obfuscation_service, props);
+      let error = MDUtils.verify(result, props);
+      assert(!error, util.format('node was not valid?:%j', error));
+    }); // 1.11
 
   }); // 1
 
