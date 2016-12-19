@@ -1,0 +1,10 @@
+version: 1
+obfuscation_service:
+  id: os-1
+  type: obfuscationservice
+  description: test_description
+  content_obfuscation_algorithm: https://ietf.org/rfc7518/A256GCM
+  obfuscation_provider: http//kms.aws.amazon.com
+  message_protocol: encryptv2
+  obfuscate_endpoint: http://fake/ob
+  deobfuscate_endpoint: http://fake/deob

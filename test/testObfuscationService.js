@@ -3,8 +3,8 @@
 const assert = require('assert');
 const fs = require('fs');
 const jsonldUtils = require('jsonld-utils/lib/jldUtils');
-const IPACanons = require('../lib/ingestPrivacyAgent').canons;
-const IPAUtils = require('../lib/ingestPrivacyAgent').utils;
+const OSCanons = require('../lib/obfuscationService').canons;
+const OSUtils = require('../lib/obfuscationService').utils;
 const PNDataModel = require('data-models/lib/PNDataModel');
 const PN_P = PNDataModel.PROPERTY;
 const PN_T = PNDataModel.TYPE;
@@ -12,7 +12,7 @@ const should = require('should');
 const YAML = require('js-yaml');
 const util = require('util');
 
-describe('IPA Ingest Privacy Agent tests', function () {
+describe('IPA ObfuscationService tests', function () {
   'use strict';
 
   function readFile(mdFile) {
@@ -22,33 +22,36 @@ describe('IPA Ingest Privacy Agent tests', function () {
   describe('1 smoke tests', function () {
 
     it('1.1 should create a JSONLD node from a valid YAML version', function () {
-      let md = YAML.safeLoad(readFile('ingestPrivacyAgentValid.yaml'));
+      let md = YAML.safeLoad(readFile('obfuscationServiceValid.yaml'));
       let props = { hostname: 'fake.hostname', domainName: 'fake.com', issuer: 'theIssuer', creationTime: 'createTime' };
-      let result = IPAUtils.YAML2Node(md.ingest_privacy_agent, props);
+      let result = OSUtils.YAML2Node(md.obfuscation_service, props);
 
-      //console.log(result);
+      console.log(result);
 
       result.should.have.property('@id');
       result.should.have.property('@type');
       assert(jsonldUtils.isType(result, PN_T.Metadata), util.format('is not Metadata:%j', result));
-      assert(jsonldUtils.isType(result, PN_T.IngestPrivacyAgent), util.format('is not a Organization:%j', result));
+      assert(jsonldUtils.isType(result, PN_T.ObfuscationService), util.format('is not a Organization:%j', result));
       assert(jsonldUtils.isType(result, PN_T.Resource), util.format('is not Resource:%j', result));
 
       result.should.have.property(PN_P.description, 'test_description');
       result.should.have.property(PN_P.issuer, 'theIssuer');
       result.should.have.property(PN_P.creationTime, 'createTime');
 
-      result.should.have.property(PN_P.pnDataModel, 'test_pndatamodel');
-      result.should.have.property(PN_P.privacyAlgorithm, 'test_privacy_algorithm');
+      result.should.have.property(PN_P.contentObfuscationAlgorithm, 'https://ietf.org/rfc7518/A256GCM');
+      result.should.have.property(PN_P.obfuscationProvider);
+      result.should.have.property(PN_P.messageProtocol, PN_T.EncryptObfuscationServiceProtocolV2);
+      result.should.have.property(PN_P.obfuscateEndpoint);
+      result.should.have.property(PN_P.deobfuscateEndpoint);
 
-      let verified = IPAUtils.verify(result, props);
+      let verified = OSUtils.verify(result, props);
       assert(!verified, util.format('verify was not valid?:%j', verified));
     }); // 1.1
 
     it('1.2 canon should be valid', function () {
       let props = { hostname: 'fake.hostname', domainName: 'fake.com', issuer: 'theIssuer', creationTime: 'createTime' };
-      let result = IPACanons.createTestIngestPrivacyAgent(props);
-      let verified = IPAUtils.verify(result, props);
+      let result = OSCanons.createTestObfuscationService(props);
+      let verified = OSUtils.verify(result, props);
       assert(!verified, util.format('was not valid?:%j', verified));
     }); // 1.2
   }); // 1
