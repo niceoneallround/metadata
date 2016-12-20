@@ -5,3 +5,4 @@ ingest_privacy_agent:
   description: test_description
   pndatamodel: test_pndatamodel
   privacy_algorithm: test_privacy_algorithm
+  obfuscation_service: test_os
