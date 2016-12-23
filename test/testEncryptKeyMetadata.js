@@ -37,7 +37,7 @@ describe('EKMD Encrypt Key Metadata Tests', function () {
       result.should.have.property(PN_P.issuer, 'theIssuer');
       result.should.have.property(PN_P.creationTime, 'createTime');
 
-      result.should.have.property(PN_P.rawEncryptKeyMetadataType, 'JSONWebKey');
+      result.should.have.property(PN_P.rawEncryptKeyMetadataType, 'jsonwebkey');
       result.should.have.property(PN_P.rawEncryptKeyMetadata);
 
       // convert back from base64 and make sure ok
