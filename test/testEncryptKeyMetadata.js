@@ -38,11 +38,11 @@ describe('EKMD Encrypt Key Metadata Tests', function () {
       result.should.have.property(PN_P.issuer, 'theIssuer');
       result.should.have.property(PN_P.creationTime, 'createTime');
 
-      result.should.have.property(PN_P.rawEncryptKeyMetadataType, 'jsonwebkey');
-      result.should.have.property(PN_P.rawEncryptKeyMetadata);
+      result.should.have.property(PN_P.rawEncryptKeyMDType, 'jsonwebkey');
+      result.should.have.property(PN_P.rawEncryptKeyMD);
 
       // convert back from base64 and make sure ok
-      let s = Buffer.from(result[PN_P.rawEncryptKeyMetadata], 'base64');
+      let s = Buffer.from(result[PN_P.rawEncryptKeyMD], 'base64');
       let j = JSON.parse(s);
       j.should.have.property('kty', 'oct');
       j.should.have.property('alg', 'AES_256');
@@ -59,7 +59,7 @@ describe('EKMD Encrypt Key Metadata Tests', function () {
       assert(!verified, util.format('was not valid?:%j', verified));
 
       // make sure can un-encode the raw_encrypt_metadata
-      let v = JSONLDUtilsNp.getV(result, PN_P.rawEncryptKeyMetadata);
+      let v = JSONLDUtilsNp.getV(result, PN_P.rawEncryptKeyMD);
       let js = Buffer.from(v, 'base64').toString();
       let jo = JSON.parse(js);
       jo.should.have.property('kty', 'oct');
@@ -74,7 +74,7 @@ describe('EKMD Encrypt Key Metadata Tests', function () {
       assert(!verified, util.format('was not valid?:%j', verified));
 
       // make sure can un-encode the raw_encrypt_metadata
-      let v = JSONLDUtilsNp.getV(result, PN_P.rawEncryptKeyMetadata);
+      let v = JSONLDUtilsNp.getV(result, PN_P.rawEncryptKeyMD);
       let js = Buffer.from(v, 'base64').toString();
       let jo = JSON.parse(js);
       jo.should.have.property('inbound_job_id', 'in-1');
