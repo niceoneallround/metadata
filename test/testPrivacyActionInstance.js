@@ -22,7 +22,7 @@ describe('PACTIONI test Privacy Action Instance', function () {
 
   describe('1 PActionInstance Create tests', function () {
 
-    it('1.1 should create a PAactionInstance from valid params', function () {
+    it('1.1 should create a PAactionInstance from a paiTemplate, privacy action, and pp', function () {
 
       // create the privacy action
       let md = YAML.safeLoad(readFile('privacyActionValid.yaml'));
@@ -55,9 +55,11 @@ describe('PACTIONI test Privacy Action Instance', function () {
       result.should.have.property(PN_P.privacyAction, paction['@id']);
       result.should.have.property(PN_P.action, PN_T.Obfuscate);
       result.should.have.property(PN_P.obfuscationService, 'fake.os.id');
-      result.should.have.property(PN_P.schema, 'a schema');
+      result.should.have.property(PN_P.obfuscationProvider);
+      result.should.have.property(PN_P.contentObfuscationAlgorithm);
       result.should.have.property(PN_P.contentEncryptKeyMD, 'http://md.pn.id.webshied.io/encrypt_key_md/com/acme#content-key-1');
       result.should.have.property(PN_P.keyEncryptKeyMD, 'http://md.pn.id.webshied.io/encrypt_key_md/com/acme#key-key-1');
+      result.should.have.property(PN_P.schema, 'a schema');
 
     }); // 1.1
   }); // 1

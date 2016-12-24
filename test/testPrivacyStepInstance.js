@@ -185,7 +185,14 @@ describe('PSI test Privacy Step Instance', function () {
       let props = { hostname: 'fake.hostname', domainName: 'fake.com', issuer: 'theIssuer', creationTime: 'createTime' };
       let result = PStepICanons.createObfuscatePrivacyStepI(props);
       assert(jsonldUtils.isType(result, PN_T.PrivacyStepInstance), util.format('is not %s :%j', PN_T.PrivacyStepInstance, result));
-      console.log(result);
+
+      result.should.have.property(PN_P.privacyActionInstance);
+      result[PN_P.privacyActionInstance].length.should.be.equal(1);
+
+      let pai = result[PN_P.privacyActionInstance][0];
+      pai.should.have.property(PN_P.privacyAction);
+      pai.should.have.property(PN_P.contentObfuscationAlgorithm);
+      pai.should.have.property(PN_P.obfuscationProvider);
     }); // 3.1
 
   }); // describe 3
