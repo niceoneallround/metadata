@@ -5,6 +5,7 @@ const fs = require('fs');
 const jsonldUtils = require('jsonld-utils/lib/jldUtils');
 const EKMDUtils = require('../lib/encryptKeyMetadata').utils;
 const EKMDCanons = require('../lib/encryptKeyMetadata').canons;
+const JSONLDUtilsNp = require('jsonld-utils/lib/jldUtils').npUtils;
 const PNDataModel = require('data-models/lib/PNDataModel');
 const PN_P = PNDataModel.PROPERTY;
 const PN_T = PNDataModel.TYPE;
@@ -56,7 +57,30 @@ describe('EKMD Encrypt Key Metadata Tests', function () {
       let result = EKMDCanons.createTestKey(props);
       let verified = EKMDUtils.verify(result, props);
       assert(!verified, util.format('was not valid?:%j', verified));
+
+      // make sure can un-encode the raw_encrypt_metadata
+      let v = JSONLDUtilsNp.getV(result, PN_P.rawEncryptKeyMetadata);
+      let js = Buffer.from(v, 'base64').toString();
+      let jo = JSON.parse(js);
+      jo.should.have.property('kty', 'oct');
+      jo.should.have.property('alg', 'AES_256');
+      jo.should.have.property('k');
     }); // 1.2
+
+    it('1.3 canon PoC2 should be valid', function () {
+      let props = { hostname: 'fake.hostname', domainName: 'fake.com', issuer: 'theIssuer', creationTime: 'createTime' };
+      let result = EKMDCanons.createPoC2Key(props);
+      let verified = EKMDUtils.verify(result, props);
+      assert(!verified, util.format('was not valid?:%j', verified));
+
+      // make sure can un-encode the raw_encrypt_metadata
+      let v = JSONLDUtilsNp.getV(result, PN_P.rawEncryptKeyMetadata);
+      let js = Buffer.from(v, 'base64').toString();
+      let jo = JSON.parse(js);
+      jo.should.have.property('inbound_job_id', 'in-1');
+      jo.should.have.property('outbound_job_id', 'out-1');
+      jo.should.have.property('process_id', '222-222');
+    }); // 1.3
 
   }); // 1
 
