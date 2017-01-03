@@ -5,3 +5,6 @@ reference_source:
   description: A test reference source
   provision_pipe_url: http://webshield.io/provision
   subject_query_url: http://webshield.io/subject_query
+  pndatamodel: test_pndatamodel
+  privacy_algorithm: test_privacy_algorithm
+  obfuscation_service: test_os
