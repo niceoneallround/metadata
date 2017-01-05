@@ -166,7 +166,7 @@ describe('MD test MD dispatch works', function () {
     it('3.2 should dispatch to the correct ID constructor', function () {
       let md = YAML.safeLoad(readFile('referenceSourceValid.yaml'));
       let result = MDUtils.YAML2Id(md.reference_source, props);
-      result.should.be.equal('https://md.pn.id.webshield.io/resource/com/fake#rs-1');
+      result.should.be.equal('https://md.pn.id.webshield.io/reference_source/com/fake#rs-1');
     }); // 3.2
 
     it('3.3 should dispatch to the correct ID constructor', function () {
