@@ -3,6 +3,7 @@ pndatamodel:
   id: pnd-1
   type: pndatamodel
   description: test_description
+  subject_type: https://subject.pn.schema.webshield.io/type#Subject
   json_schema:
     $schema: 'http://json-schema.org/draft-04/schema#'
     id: 'https://subject.pn.schema.webshield.io'

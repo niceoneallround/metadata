@@ -1,6 +1,7 @@
 /*jslint node: true, vars: true */
 
 const assert = require('assert');
+const BaseSubjectPNDataModel = require('data-models/lib/BaseSubjectPNDataModel');
 const fs = require('fs');
 const jsonldUtils = require('jsonld-utils/lib/jldUtils');
 const PNDataModelCanons = require('../lib/PNDataModel').canons;
@@ -34,6 +35,8 @@ describe('PNDataModel Metadata Tests', function () {
       result.should.have.property(PN_P.description, 'test_description');
       result.should.have.property(PN_P.issuer, 'theIssuer');
       result.should.have.property(PN_P.creationTime, 'createTime');
+
+      result.should.have.property(PN_P.subjectType, BaseSubjectPNDataModel.TYPE.Subject);
 
       result.should.have.property(PN_P.jsonSchema);
       (typeof result[PN_P.jsonSchema]).should.be.equal('string');
