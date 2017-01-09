@@ -60,6 +60,13 @@ describe('PNDataModel Metadata Tests', function () {
       let verified = PNDataModelUtils.verify(result, props);
       assert(!verified, util.format('was not valid?:%j', verified));
     }); // 1.2
+
+    it('1.3 test reference source canon should be valid', function () {
+      let props = { hostname: 'fake.hostname', domainName: 'fake.com', issuer: 'theIssuer', creationTime: 'createTime' };
+      let result = PNDataModelCanons.createTestReferenceSourcePNDataModel(props);
+      let verified = PNDataModelUtils.verify(result, props);
+      assert(!verified, util.format('was not valid?:%j', verified));
+    }); // 1.3
   }); // 1
 
 });
