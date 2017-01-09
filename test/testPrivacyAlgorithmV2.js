@@ -77,6 +77,25 @@ describe('PAv2 Privacy Algorithm V2', function () {
 
       assert(!verified, util.format('PA was not valid?:%j', verified));
     }); // 1.2
+
+    it('1.3 test reference source canon should be valid', function () {
+      let props = { hostname: 'fake.hostname', domainName: 'fake.com', issuer: 'theIssuer', creationTime: 'createTime' };
+      let result = PACanons.createTestReferenceSourcePrivacyAlgorithm(props);
+      let verified = PAUtils.verify(result, props);
+
+      // check has some required stuff
+      result.should.have.property(PN_P.privacyStep);
+      result[PN_P.privacyStep].length.should.be.equal(1);
+
+      let ps = result[PN_P.privacyStep][0];
+      ps.should.have.property(PN_P.privacyAction);
+      ps[PN_P.privacyAction].length.should.be.equal(1);
+
+      let pa = ps[PN_P.privacyAction][0];
+      pa.should.have.property(PN_P.contentEncryptKeyMD);
+
+      assert(!verified, util.format('PA was not valid?:%j', verified));
+    }); // 1.2
   }); // 1
 
 });
