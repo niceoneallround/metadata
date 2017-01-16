@@ -172,7 +172,7 @@ describe('MD test MD dispatch works', function () {
     it('3.3 should dispatch to the correct ID constructor', function () {
       let md = YAML.safeLoad(readFile('ISAlgorithmValid.yaml'));
       let result = MDUtils.YAML2Id(md.is_algorithm, props);
-      result.should.be.equal('https://md.pn.id.webshield.io/resource/com/fake#test-isa');
+      result.should.be.equal('https://md.pn.id.webshield.io/identity_syndication_algorithm/com/fake#test-isa');
     }); // 3.3
 
     it('3.4 should dispatch to the KMS ID constructor', function () {
