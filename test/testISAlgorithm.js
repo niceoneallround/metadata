@@ -4,6 +4,7 @@ const assert = require('assert');
 const fs = require('fs');
 const jsonldUtils = require('jsonld-utils/lib/jldUtils');
 const ISAUtils = require('../lib/ISAlgorithm').utils;
+const ISACanon = require('../lib/ISAlgorithm').canons;
 const PNDataModel = require('data-models/lib/PNDataModel');
 const PN_P = PNDataModel.PROPERTY;
 const PN_T = PNDataModel.TYPE;
@@ -42,6 +43,13 @@ describe('test Identity Syndicatiton Algorithm', function () {
       let verified = ISAUtils.verify(result, 'fake.hostname');
       assert(!verified, util.format('ISA was not valid?:%j', verified));
     }); // 1.1
+
+    it('1.2 canon should be valid', function () {
+      let props = { hostname: 'fake.hostname', domainName: 'fake.com', issuer: 'theIssuer', creationTime: 'createTime' };
+      let result = ISACanon.createISAlgorithm(props);
+      let verified = ISAUtils.verify(result, props);
+      assert(!verified, util.format('was not valid?:%j', verified));
+    }); // 1.2
   }); // 1
 
 });

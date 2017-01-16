@@ -48,7 +48,7 @@ describe('test Reference Source', function () {
       assert(!verified, util.format('RS was not valid?:%j', verified));
     }); // 1.1
 
-    it('1.3 canon should be valid', function () {
+    it('1.2 canon should be valid', function () {
       let props = { hostname: 'fake.hostname', domainName: 'fake.com', issuer: 'theIssuer', creationTime: 'createTime' };
       let result = RSCanons.createTestReferenceSource(props);
       let verified = RSUtils.verify(result, props);
