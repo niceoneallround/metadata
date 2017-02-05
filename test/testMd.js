@@ -97,6 +97,13 @@ describe('MD test MD dispatch works', function () {
       assert(!error, util.format('node was not valid?:%j', error));
     }); // 1.11
 
+    it('1.12 should dispatch to QueryPrivacyAgent', function () {
+      let md = YAML.safeLoad(readFile('queryPrivacyAgentValid.yaml'));
+      let result = MDUtils.YAML2Node(md.query_privacy_agent, props);
+      let error = MDUtils.verify(result, props);
+      assert(!error, util.format('node was not valid?:%j', error));
+    }); // 1.12
+
   }); // 1
 
   describe('2 JWTPayload2Node tests', function () {
@@ -198,6 +205,12 @@ describe('MD test MD dispatch works', function () {
       let result = MDUtils.YAML2Id(md.ingest_privacy_agent, props);
       result.should.be.equal('https://md.pn.id.webshield.io/ingest_privacy_agent/com/fake#ingest-1');
     }); // 3.7
+
+    it('3.8 should dispatch to the Query Privacy Agent ID constructor', function () {
+      let md = YAML.safeLoad(readFile('queryPrivacyAgentValid.yaml'));
+      let result = MDUtils.YAML2Id(md.query_privacy_agent, props);
+      result.should.be.equal('https://md.pn.id.webshield.io/query_privacy_agent/com/fake#qpa-1');
+    }); // 3.8
 
   }); // 3
 
