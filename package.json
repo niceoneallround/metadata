@@ -1,6 +1,6 @@
 {
   "name": "metadata",
-  "version": "0.1.49",
+  "version": "0.2.0",
   "description": "Metadata constructors and validators",
   "main": "index.js",
   "scripts": {
