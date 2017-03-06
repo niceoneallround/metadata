@@ -4,6 +4,7 @@ query_privacy_agent:
   type: QueryPrivacyAgent
   description: A test qpa
   provision_pipe_url: http://webshield.io/provision
+  post_query_result_url: http://webshield.io/provision
   pndatamodel: test_pndatamodel
   privacy_algorithm: test_privacy_algorithm
   obfuscation_service: test_os

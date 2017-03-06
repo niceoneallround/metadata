@@ -39,6 +39,7 @@ describe('test Query Privacy Agent', function () {
       result.should.have.property(PN_P.creationTime, 'createTime');
 
       result.should.have.property(PN_P.provisionPipeURL);
+      result.should.have.property(PN_P.postQueryResultURL);
       result.should.have.property(PN_P.pnDataModel, 'test_pndatamodel');
       result.should.have.property(PN_P.privacyAlgorithm, 'test_privacy_algorithm');
       result.should.have.property(PN_P.obfuscationService, 'test_os');
