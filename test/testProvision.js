@@ -38,6 +38,32 @@ describe('test Provision', function () {
       let verified = provisionUtils.verify(result, 'fake.hostname');
       assert(!verified, util.format('node was not valid?:%j', verified));
     }); // 1.1
+
+    it('1.2 should convert metadata to a array if not already', function () {
+      let md = {
+        id: 'test-provision',
+        type: 'provision',
+        description: 'test_description',
+        provisioned_metadata: 'test_md1',
+        privacy_pipe: 'test_pipe',
+      };
+
+      let props = { hostname: 'fake.hostname', domainName: 'fake.com', issuer: 'theIssuer', creationTime: 'createTime' };
+      let result = provisionUtils.YAML2Node(md, props);
+
+      //console.log(result);
+
+      result.should.have.property('@id');
+      result.should.have.property('@type');
+      assert(jsonldUtils.isType(result, PN_T.Provision), util.format('is not Provision:%j', result));
+
+      result.should.have.property(PN_P.provisionedMetadata, ['test_md1']);
+      result.should.have.property(PN_P.privacyPipe, 'test_pipe');
+      result.should.have.property(PN_P.description, 'test_description');
+
+      let verified = provisionUtils.verify(result, 'fake.hostname');
+      assert(!verified, util.format('node was not valid?:%j', verified));
+    }); // 1.2
   }); // 1
 
 });
