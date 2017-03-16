@@ -31,7 +31,7 @@ describe('test Provision', function () {
       result.should.have.property('@type');
       assert(jsonldUtils.isType(result, PN_T.Provision), util.format('is not Provision:%j', result));
 
-      result.should.have.property(PN_P.provisionedMetadata, 'test_md');
+      result.should.have.property(PN_P.provisionedMetadata, ['test_md1', 'test_md2']);
       result.should.have.property(PN_P.privacyPipe, 'test_pipe');
       result.should.have.property(PN_P.description, 'test_description');
 

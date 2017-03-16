@@ -3,5 +3,7 @@ provision:
   id: test-provision
   type: provision
   description: test_description
-  provisioned_metadata: test_md
+  provisioned_metadata:
+    - test_md1
+    - test_md2
   privacy_pipe: test_pipe
