@@ -4,6 +4,7 @@ const assert = require('assert');
 const fs = require('fs');
 const jsonldUtils = require('jsonld-utils/lib/jldUtils');
 const provisionUtils = require('../lib/provision').utils;
+const ProvisionCanons = require('../lib/provision').canons;
 const PNDataModel = require('data-models/lib/PNDataModel');
 const PN_P = PNDataModel.PROPERTY;
 const PN_T = PNDataModel.TYPE;
@@ -65,5 +66,24 @@ describe('test Provision', function () {
       assert(!verified, util.format('node was not valid?:%j', verified));
     }); // 1.2
   }); // 1
+
+  describe('2 Canon Tests', function () {
+
+    it('2.1 should return a provision with an de-obfuscate psi for the canon syndicate request subjects', function () {
+      let props = { hostname: 'fake.hostname', domainName: 'fake.com', privacyPipeId: 'pipe1', };
+      let provision = ProvisionCanons.createDebofuscateIngestPASubjectsProvision(props);
+
+      let verified = provisionUtils.verify(provision, 'fake.hostname');
+      assert(!verified, util.format('node was not valid?:%j', verified));
+    }); // 2.1
+
+    it('2.2 should return a provision with an de-obfuscate psi for the canon reference source query result subjects', function () {
+      let props = { hostname: 'fake.hostname', domainName: 'fake.com', privacyPipeId: 'pipe1', };
+      let provision = ProvisionCanons.createDebofuscateReferenceSourceSubjectsProvision(props);
+
+      let verified = provisionUtils.verify(provision, 'fake.hostname');
+      assert(!verified, util.format('node was not valid?:%j', verified));
+    }); // 2.1
+  }); // 2
 
 });

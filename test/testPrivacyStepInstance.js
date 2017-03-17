@@ -179,7 +179,7 @@ describe('PSI test Privacy Step Instance', function () {
     }); // 2.1
   }); // describe 2
 
-  describe('3 Privacy Step Instance Canon Tests', function () {
+  describe('3 Privacy Step Instance Canon Tests for canon syndicate request', function () {
 
     it('3.1 obfuscate canon should be valid', function () {
       let props = { hostname: 'fake.hostname', domainName: 'fake.com', issuer: 'theIssuer', creationTime: 'createTime' };
@@ -222,6 +222,20 @@ describe('PSI test Privacy Step Instance', function () {
       pai.should.have.property(PN_P.contentObfuscationAlgorithm);
       pai.should.have.property(PN_P.obfuscationProvider);
     }); // 3.3
+
+    it('3.4 psi to deobfuscate reference source subjects canon should be valid', function () {
+      let props = { hostname: 'fake.hostname', domainName: 'fake.com', issuer: 'theIssuer', creationTime: 'createTime' };
+      let result = PStepICanons.createDeobfuscateReferenceSourceSubjectsPrivacyStepI(props);
+      assert(jsonldUtils.isType(result, PN_T.PrivacyStepInstance), util.format('is not %s :%j', PN_T.PrivacyStepInstance, result));
+
+      result.should.have.property(PN_P.privacyActionInstance);
+      result[PN_P.privacyActionInstance].length.should.be.equal(1);
+
+      let pai = result[PN_P.privacyActionInstance][0];
+      pai.should.have.property(PN_P.privacyAction);
+      pai.should.have.property(PN_P.contentObfuscationAlgorithm);
+      pai.should.have.property(PN_P.obfuscationProvider);
+    }); // 3.4
 
   }); // describe 3
 
