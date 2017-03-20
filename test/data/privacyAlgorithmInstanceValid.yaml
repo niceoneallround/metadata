@@ -12,3 +12,4 @@ privacy_algorithm_instance:
           privacy_action: privacy-action-id
           obfuscation_service: fake.id
           action: obfuscate
+          schema: not-set
